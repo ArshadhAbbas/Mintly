@@ -1,6 +1,7 @@
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mintly/utils/app_constants.dart/app_theme.dart';
 import 'package:mintly/utils/config/go_router_config.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MintlyApp extends StatelessWidget {
     return ConnectivityAppWrapper(
       app: MaterialApp.router(
         title: 'Mintly',
-        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+        theme: AppTheme.light(),
+        themeMode: ThemeMode.light,
         routerConfig: GoRouterConfig.router,
       ),
     );
