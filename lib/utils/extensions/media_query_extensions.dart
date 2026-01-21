@@ -5,3 +5,7 @@ extension MediaQueryExtensions on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;
   Size get screenSize => Size(screenWidth, screenHeight);
 }
+
+extension ThemeExtensions on BuildContext {
+  Color get scaffoldColor => Theme.of(this).scaffoldBackgroundColor;
+}

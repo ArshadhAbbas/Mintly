@@ -14,6 +14,24 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart' as _svg;
 import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
+class $AssetsBottomNavGen {
+  const $AssetsBottomNavGen();
+
+  /// File path: assets/bottom_nav/analysis.svg
+  SvgGenImage get analysis =>
+      const SvgGenImage('assets/bottom_nav/analysis.svg');
+
+  /// File path: assets/bottom_nav/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/bottom_nav/home.svg');
+
+  /// File path: assets/bottom_nav/settings.svg
+  SvgGenImage get settings =>
+      const SvgGenImage('assets/bottom_nav/settings.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [analysis, home, settings];
+}
+
 class $AssetsGeneralGen {
   const $AssetsGeneralGen();
 
@@ -47,8 +65,7 @@ class $AssetsOnBoardingGen {
 class Assets {
   const Assets._();
 
-  static const String package = 'mintly';
-
+  static const $AssetsBottomNavGen bottomNav = $AssetsBottomNavGen();
   static const $AssetsGeneralGen general = $AssetsGeneralGen();
   static const $AssetsOnBoardingGen onBoarding = $AssetsOnBoardingGen();
 }
@@ -62,8 +79,6 @@ class AssetGenImage {
   });
 
   final String _assetName;
-
-  static const String package = 'mintly';
 
   final Size? size;
   final Set<String> flavors;
@@ -89,8 +104,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = true,
     bool isAntiAlias = false,
-    @Deprecated('Do not specify package for a generated library asset')
-    String? package = package,
+    String? package,
     FilterQuality filterQuality = FilterQuality.medium,
     int? cacheWidth,
     int? cacheHeight,
@@ -123,17 +137,13 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    @Deprecated('Do not specify package for a generated library asset')
-    String? package = package,
-  }) {
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
     return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
 
-  String get keyName => 'packages/mintly/$_assetName';
+  String get keyName => _assetName;
 }
 
 class AssetGenImageAnimation {
@@ -160,14 +170,11 @@ class SvgGenImage {
   final Set<String> flavors;
   final bool _isVecFormat;
 
-  static const String package = 'mintly';
-
   _svg.SvgPicture svg({
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
-    @Deprecated('Do not specify package for a generated library asset')
-    String? package = package,
+    String? package,
     double? width,
     double? height,
     BoxFit fit = BoxFit.contain,
@@ -222,5 +229,5 @@ class SvgGenImage {
 
   String get path => _assetName;
 
-  String get keyName => 'packages/mintly/$_assetName';
+  String get keyName => _assetName;
 }
