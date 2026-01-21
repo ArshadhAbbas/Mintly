@@ -18,7 +18,7 @@ class AppTheme {
         bodySmall: TextStyleConstants.w400F12,
         labelLarge: TextStyleConstants.w600F14,
       ),
-
+      textButtonTheme: TextButtonThemeData(style: ButtonStyle(foregroundColor: WidgetStatePropertyAll(Colors.black))),
       cardTheme: CardThemeData(
         color: AppColors.lightCard,
         elevation: 0,

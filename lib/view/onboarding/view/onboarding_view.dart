@@ -32,20 +32,31 @@ class OnBoardingView extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: List.generate(
-                  imagesList.length,
-                  (index) => AnimatedContainer(
-                    margin: EdgeInsets.all(2),
-                    duration: Duration(milliseconds: 500),
-                    width: index == currentIndex ? 20 : 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color: index == currentIndex ? Colors.black : Colors.black.withValues(alpha: 0.6),
-                      borderRadius: BorderRadius.circular(30),
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+                    },
+                    child: Text("Skip", style: TextStyleConstants.w500F14.copyWith(decoration: TextDecoration.underline)),
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: List.generate(
+                      imagesList.length,
+                      (index) => AnimatedContainer(
+                        margin: EdgeInsets.all(2),
+                        duration: Duration(milliseconds: 500),
+                        width: index == currentIndex ? 20 : 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: index == currentIndex ? Colors.black : Colors.black.withValues(alpha: 0.6),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
             SizedBox(height: 60),
