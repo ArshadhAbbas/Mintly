@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mintly/controller/onboarding_controller.dart';
 import 'package:mintly/gen/assets.gen.dart';
 import 'package:mintly/utils/app_constants.dart/app_theme.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
+import 'package:mintly/view/bottom_nav/view/bottom_nav_view.dart';
 
 class OnBoardingView extends ConsumerWidget {
   static String path = "/";
@@ -35,7 +37,7 @@ class OnBoardingView extends ConsumerWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      pageController.animateToPage(2, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+                      context.pushReplacementNamed(BottomNavView.pathName);
                     },
                     child: Text("Skip", style: TextStyleConstants.w500F14.copyWith(decoration: TextDecoration.underline)),
                   ),
@@ -123,7 +125,7 @@ class OnBoardingView extends ConsumerWidget {
                       if (currentIndex < imagesList.length - 1) {
                         pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
                       } else {
-                        // Navigate to login / home
+                        context.pushReplacementNamed(BottomNavView.pathName);
                       }
                     },
                     child: Container(

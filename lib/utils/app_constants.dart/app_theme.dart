@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 
@@ -29,7 +30,16 @@ class AppTheme {
 
       iconTheme: const IconThemeData(color: AppColors.textPrimaryLight, size: 22),
 
-      appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0, foregroundColor: AppColors.textPrimaryLight),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: AppColors.textPrimaryLight,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      ),
 
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColors.white,
