@@ -32,6 +32,20 @@ class $AssetsBottomNavGen {
   List<SvgGenImage> get values => [analysis, home, settings];
 }
 
+class $AssetsCardsGen {
+  const $AssetsCardsGen();
+
+  /// File path: assets/cards/mastercard.svg
+  SvgGenImage get mastercard =>
+      const SvgGenImage('assets/cards/mastercard.svg');
+
+  /// File path: assets/cards/rupay.svg
+  SvgGenImage get rupay => const SvgGenImage('assets/cards/rupay.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [mastercard, rupay];
+}
+
 class $AssetsGeneralGen {
   const $AssetsGeneralGen();
 
@@ -66,6 +80,7 @@ class Assets {
   const Assets._();
 
   static const $AssetsBottomNavGen bottomNav = $AssetsBottomNavGen();
+  static const $AssetsCardsGen cards = $AssetsCardsGen();
   static const $AssetsGeneralGen general = $AssetsGeneralGen();
   static const $AssetsOnBoardingGen onBoarding = $AssetsOnBoardingGen();
 }

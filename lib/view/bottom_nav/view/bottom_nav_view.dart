@@ -15,7 +15,7 @@ class BottomNavView extends ConsumerWidget {
     int currentIndex = ref.watch(bottomNavControllerProvider);
     return Scaffold(
       appBar: AppBar(title: SvgPicture.asset(Assets.general.mintlyLogo.path, height: 20)),
-      body: Center(child: ref.read(screensProvider)[currentIndex]),
+      body: ref.read(screensProvider)[currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomBottomNav(currentIndex: currentIndex),
     );
