@@ -9,7 +9,7 @@ part 'bottom_nav_controller.g.dart';
 @riverpod
 class BottomNavController extends _$BottomNavController {
   @override
-  int build() => 0;
+  int build() => 1;
 
   void updateBottomNavIndex({required int index}) {
     state = index;
