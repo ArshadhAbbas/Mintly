@@ -42,7 +42,7 @@ final class BottomNavControllerProvider
 }
 
 String _$bottomNavControllerHash() =>
-    r'6550fa22b40e9d322b7f43dd53a7f3131fa249c1';
+    r'0da931d0f564f3274275a33a0a50e3dcfe654ff2';
 
 abstract class _$BottomNavController extends $Notifier<int> {
   int build();

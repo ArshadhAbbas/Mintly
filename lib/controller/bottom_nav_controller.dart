@@ -21,16 +21,12 @@ int bottomNavIndexController(Ref ref) => ref.watch(bottomNavControllerProvider);
 
 final screensProvider = Provider<List<Widget>>((ref) {
   return [
-    HomeView(),
     Container(height: 100, width: 100, color: Colors.lightGreen),
+    HomeView(),
     Container(height: 100, width: 100, color: Colors.blueGrey),
   ];
 });
 
 final bottomNavIconsProvider = Provider<List<String>>((ref) {
-  return [
-    Assets.bottomNav.analysis.path,
-    Assets.bottomNav.home.path,
-    Assets.bottomNav.settings.path
-  ];
+  return [Assets.bottomNav.analysis.path, Assets.bottomNav.home.path, Assets.bottomNav.settings.path];
 });
