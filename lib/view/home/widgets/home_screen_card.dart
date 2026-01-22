@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mintly/controller/card_switch_controller.dart';
 import 'package:mintly/model/card_model.dart';
+import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/card_extensions.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
@@ -24,7 +25,7 @@ class HomeScreenCard extends StatelessWidget {
       margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       width: context.screenWidth,
       decoration: BoxDecoration(
-        color: Color(0xFFE6ED5D),
+        color: AppColors.appThemeYellow,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [BoxShadow(color: Colors.black, offset: Offset(5, 5))],
       ),
