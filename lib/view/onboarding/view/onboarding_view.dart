@@ -38,7 +38,7 @@ class OnBoardingView extends ConsumerWidget {
                   TextButton(
                     onPressed: () {
                       ref.read(onboardingControllerProvider.notifier).updateCurrentIndex(2);
-                      context.pushReplacementNamed(BottomNavView.pathName);
+                      // context.pushReplacementNamed(BottomNavView.pathName);
                     },
                     child: Text("Skip", style: TextStyleConstants.w500F14.copyWith(decoration: TextDecoration.underline)),
                   ),
