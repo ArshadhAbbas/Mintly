@@ -1,6 +1,8 @@
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:mintly/model/hive_registrar.g.dart';
 import 'package:mintly/utils/app_constants.dart/app_theme.dart';
 import 'package:mintly/utils/config/go_router_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +11,8 @@ SharedPreferences? prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
+  await Hive.initFlutter();
+  Hive.registerAdapters();
   runApp(ProviderScope(child: const MintlyApp()));
 }
 
