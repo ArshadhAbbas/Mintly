@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mintly/controller/card_switch_controller.dart';
+import 'package:mintly/utils/extensions/media_query_extensions.dart';
 import 'package:mintly/view/home/widgets/home_screen_card.dart';
 
 class HomeScreenCardsList extends ConsumerWidget {
@@ -13,15 +14,20 @@ class HomeScreenCardsList extends ConsumerWidget {
     return Column(
       mainAxisAlignment: .center,
       crossAxisAlignment: .center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        CarouselSlider.builder(
-          itemCount: 2,
-          itemBuilder: (context, index, realIndex) => HomeScreenCard(),
-          options: CarouselOptions(
-            viewportFraction: 1,
-            autoPlay: false,
-            enableInfiniteScroll: false,
-            onPageChanged: (index, reason) => ref.read(cardIndicatorControllerProvider.notifier).updateCardIndicator(index),
+        SizedBox(
+          height: context.isMobile ? null : context.screenWidth * 0.25,
+          width: context.isMobile ? double.infinity : context.screenWidth / 2,
+          child: CarouselSlider.builder(
+            itemCount: 2,
+            itemBuilder: (context, index, realIndex) => HomeScreenCard(),
+            options: CarouselOptions(
+              viewportFraction: 1,
+              autoPlay: false,
+              enableInfiniteScroll: false,
+              onPageChanged: (index, reason) => ref.read(cardIndicatorControllerProvider.notifier).updateCardIndicator(index),
+            ),
           ),
         ),
         SizedBox(height: 10),

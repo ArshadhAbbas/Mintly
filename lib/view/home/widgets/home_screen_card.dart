@@ -21,76 +21,81 @@ class HomeScreenCard extends StatelessWidget {
       expiry: "96/825",
       cardNumber: "100000000000",
     );
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      width: context.screenWidth,
-      decoration: BoxDecoration(
-        color: AppColors.appThemeYellow,
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [BoxShadow(color: Colors.black, offset: Offset(5, 5))],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
-            child: Row(
-              children: [
-                cardModel.cardIcon,
-                Spacer(),
-                Text(cardModel.currency.name.toUpperCase(), style: TextStyleConstants.w600F14),
-              ],
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          decoration: BoxDecoration(
+            color: AppColors.appThemeYellow,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [BoxShadow(color: Colors.black, offset: Offset(5, 5))],
           ),
-          SizedBox(height: 30),
-          Consumer(
-            builder: (context, ref, child) {
-              final bool shouldShowText = ref.watch(cardSwitchControllerProvider);
-              return Container(
-                height: 40,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                width: context.screenWidth,
-                color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              SizedBox(height: constraints.maxHeight / 10),
+              Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Align(
-                      alignment: AlignmentGeometry.centerLeft,
-                      child: Text(
-                        shouldShowText
-                            ? cardModel.cardNumber.splitStringByLength(splitLength: 4)
-                            : cardModel.cardNumber.splitStringByLength(splitLength: 4).starred,
-                        style: TextStyleConstants.w400F18.copyWith(color: Colors.white),
-                      ),
+                    cardModel.cardIcon,
+                    Spacer(),
+                    Text(cardModel.currency.name.toUpperCase(), style: TextStyleConstants.w600F14),
+                  ],
+                ),
+              ),
+              SizedBox(height: constraints.maxHeight / 6),
+              Consumer(
+                builder: (context, ref, child) {
+                  final bool shouldShowText = ref.watch(cardSwitchControllerProvider);
+                  return Container(
+                    height: 40,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    width: context.screenWidth,
+                    color: Colors.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Align(
+                          alignment: AlignmentGeometry.centerLeft,
+                          child: Text(
+                            shouldShowText
+                                ? cardModel.cardNumber.splitStringByLength(splitLength: 4)
+                                : cardModel.cardNumber.splitStringByLength(splitLength: 4).starred,
+                            style: TextStyleConstants.w400F18.copyWith(color: Colors.white),
+                          ),
+                        ),
+                        CardSwitch(),
+                      ],
                     ),
-                    CardSwitch(),
-                  ],
-                ),
-              );
-            },
-          ),
-          SizedBox(height: 40),
-          Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Your Balance", style: TextStyleConstants.w400F12.copyWith(color: Colors.black)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  );
+                },
+              ),
+              Spacer(),
+              Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${cardModel.currency.getCurrency}${cardModel.balance}", style: TextStyleConstants.w600F16),
-                    Text(cardModel.expiry, style: TextStyleConstants.w400F12),
+                    Text("Your Balance", style: TextStyleConstants.w400F12.copyWith(color: Colors.black)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("${cardModel.currency.getCurrency}${cardModel.balance}", style: TextStyleConstants.w600F16),
+                        Text(cardModel.expiry, style: TextStyleConstants.w400F12),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: constraints.maxHeight/15,)
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

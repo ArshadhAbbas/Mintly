@@ -24,12 +24,12 @@ class RecentTransactionsList extends StatelessWidget {
           ),
           SizedBox(height: 10),
           ListView.separated(
-            separatorBuilder: (context, index) => SizedBox(height: 10),
-            itemCount: 5,
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) => TransactionCard(),
-          ),
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                  itemCount: 5,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => TransactionCard(),
+                )
         ],
       ),
     );
