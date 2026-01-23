@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/controller/bottom_nav_controller.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
-import 'package:mintly/view/bottom_nav/widgets/bottom_nav_indicator.dart';
 
 class CustomBottomNav extends ConsumerWidget {
   const CustomBottomNav({super.key, required this.currentIndex});
@@ -11,10 +10,10 @@ class CustomBottomNav extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
+    return Container(clipBehavior: Clip.none,
       padding: EdgeInsets.symmetric(horizontal: 25),
       margin: EdgeInsets.symmetric(horizontal: 20),
-      height: kBottomNavigationBarHeight + 10,
+      height: kBottomNavigationBarHeight,
       width: double.infinity,
       decoration: BoxDecoration(
         color: context.scaffoldColor,
@@ -24,16 +23,6 @@ class CustomBottomNav extends ConsumerWidget {
       child: Stack(
         alignment: AlignmentGeometry.center,
         children: [
-          AnimatedAlign(
-            duration: Duration(milliseconds: 100),
-            alignment: currentIndex == 0
-                ? AlignmentDirectional.topStart
-                : currentIndex == 1
-                ? AlignmentDirectional.topCenter
-                : AlignmentDirectional.topEnd,
-            child: BottomNavIndicator(),
-          ),
-
           Positioned.fill(
             child: AnimatedAlign(
               duration: const Duration(milliseconds: 100),
@@ -53,21 +42,17 @@ class CustomBottomNav extends ConsumerWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 14.8),
             child: Row(
               mainAxisAlignment: .spaceBetween,
               children: List.generate(
                 3,
                 (index) => GestureDetector(
                   onTap: () => ref.read(bottomNavControllerProvider.notifier).updateBottomNavIndex(index: index),
-                  child: SvgPicture.asset(
-                    ref.watch(bottomNavIconsProvider)[index],
-                    height: 30,
-                    width: 30,
-                    colorFilter: ColorFilter.mode(
-                      ref.watch(bottomNavControllerProvider) == index ? Colors.white : Colors.black.withValues(alpha: 0.2),
-                      BlendMode.srcIn,
-                    ),
+                  child: HugeIcon(
+                    icon: ref.watch(bottomNavIconsProvider)[index],
+                    size: 20,
+                    color: ref.watch(bottomNavControllerProvider) == index ? Colors.white : Colors.black.withValues(alpha: 0.2),
                   ),
                 ),
               ),
