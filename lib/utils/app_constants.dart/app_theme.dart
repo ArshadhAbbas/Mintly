@@ -26,6 +26,11 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       ),
 
+      popupMenuTheme: PopupMenuThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        color: AppColors.white,
+      ),
+
       dividerTheme: DividerThemeData(color: AppColors.dividerLight, thickness: 1),
 
       iconTheme: const IconThemeData(color: AppColors.textPrimaryLight, size: 22),

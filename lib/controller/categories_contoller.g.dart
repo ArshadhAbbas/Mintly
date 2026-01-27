@@ -94,3 +94,57 @@ final class SeedCategoriesIfNeededProvider
 
 String _$seedCategoriesIfNeededHash() =>
     r'c0434addcc85f921291414a2e3a2dc63142c9ba6';
+
+@ProviderFor(SelectedCategoryIconController)
+final selectedCategoryIconControllerProvider =
+    SelectedCategoryIconControllerProvider._();
+
+final class SelectedCategoryIconControllerProvider
+    extends $NotifierProvider<SelectedCategoryIconController, String> {
+  SelectedCategoryIconControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'selectedCategoryIconControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$selectedCategoryIconControllerHash();
+
+  @$internal
+  @override
+  SelectedCategoryIconController create() => SelectedCategoryIconController();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$selectedCategoryIconControllerHash() =>
+    r'9dfffeb428f6a36f6e858adf6e4b7bdfe9547830';
+
+abstract class _$SelectedCategoryIconController extends $Notifier<String> {
+  String build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

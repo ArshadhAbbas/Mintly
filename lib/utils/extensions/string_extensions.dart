@@ -25,4 +25,8 @@ extension StringExtensions on String {
     }
     return result.join();
   }
+
+  String get toTitleCase {
+    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  }
 }

@@ -17,10 +17,10 @@ class CategoriesModelAdapter extends TypeAdapter<CategoriesModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CategoriesModel(
-      categoryId: (fields[0] as num).toInt(),
+      categoryId: fields[0] as String,
       categoryName: fields[1] as String,
       categoryIcon: fields[2] as String,
-      subCategory: fields[3] as CategoriesModel?,
+      subCategories: (fields[5] as List?)?.cast<CategoriesModel>(),
     );
   }
 
@@ -34,8 +34,8 @@ class CategoriesModelAdapter extends TypeAdapter<CategoriesModel> {
       ..write(obj.categoryName)
       ..writeByte(2)
       ..write(obj.categoryIcon)
-      ..writeByte(3)
-      ..write(obj.subCategory);
+      ..writeByte(5)
+      ..write(obj.subCategories);
   }
 
   @override

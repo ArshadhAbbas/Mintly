@@ -5,7 +5,7 @@ nextTypeId: 2
 types:
   CategoriesModel:
     typeId: 0
-    nextIndex: 4
+    nextIndex: 6
     fields:
       categoryId:
         index: 0
@@ -13,5 +13,5 @@ types:
         index: 1
       categoryIcon:
         index: 2
-      subCategory:
-        index: 3
+      subCategories:
+        index: 5

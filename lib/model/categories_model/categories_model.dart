@@ -4,12 +4,18 @@ import 'package:hive_ce/hive_ce.dart';
 part 'categories_model.g.dart';
 
 class CategoriesModel {
-  int categoryId;
+  String categoryId;
   String categoryName;
   String categoryIcon;
-  CategoriesModel? subCategory;
-  CategoriesModel({required this.categoryId, required this.categoryName, required this.categoryIcon, this.subCategory});
+  List<CategoriesModel>? subCategories;
+  CategoriesModel({required this.categoryId, required this.categoryName, required this.categoryIcon, this.subCategories});
 
-  @override
-  String toString() => 'CategoriesModel(categoryId: $categoryId, categoryName: $categoryName, categoryIcon: $categoryIcon)';
+  CategoriesModel copyWith({String? categoryId, String? categoryName, String? categoryIcon, List<CategoriesModel>? subCategories}) {
+    return CategoriesModel(
+      categoryId: categoryId ?? this.categoryId,
+      categoryName: categoryName ?? this.categoryName,
+      categoryIcon: categoryIcon ?? this.categoryIcon,
+      subCategories: subCategories ?? this.subCategories,
+    );
+  }
 }

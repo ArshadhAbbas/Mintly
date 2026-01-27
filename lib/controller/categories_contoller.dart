@@ -41,7 +41,22 @@ Future<void> seedCategoriesIfNeeded(Ref ref) async {
 }
 
 List<CategoriesModel> categoriesListInit = [
-  CategoriesModel(categoryId: 0, categoryName: "Groceries", categoryIcon:HugeIconConfig.stringify(HugeIcons.strokeRoundedShoppingCart01)),
-
-  CategoriesModel(categoryId: 1, categoryName: "Transport", categoryIcon: HugeIconConfig.stringify(HugeIcons.strokeRoundedCar04)),
+  CategoriesModel(
+    categoryId: "groceries",
+    categoryName: "Groceries",
+    categoryIcon: HugeIconConfig.stringify(HugeIcons.strokeRoundedShoppingCart01),
+  ),
+  CategoriesModel(categoryId: "transport", categoryName: "Transport", categoryIcon: HugeIconConfig.stringify(HugeIcons.strokeRoundedCar04)),
 ];
+
+@riverpod
+class SelectedCategoryIconController extends _$SelectedCategoryIconController {
+  @override
+  String build() {
+    return HugeIconConfig.stringify(HugeIcons.strokeRoundedMore02);
+  }
+
+  void updateSelectedCategoryIcon(String newIcon) {
+    state = newIcon;
+  }
+}
