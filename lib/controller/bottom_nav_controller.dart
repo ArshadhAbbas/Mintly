@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:mintly/view/analysis/view/analysis_view.dart';
 import 'package:mintly/view/home/view/home_view.dart';
 import 'package:mintly/view/preferences/preferences_view.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,7 +22,7 @@ class BottomNavController extends _$BottomNavController {
 int bottomNavIndexController(Ref ref) => ref.watch(bottomNavControllerProvider);
 
 final screensProvider = Provider<List<Widget>>((ref) {
-  return [Container(height: 100, width: 100, color: Colors.lightGreen), HomeView(), PreferencesView()];
+  return [AnalysisView(), HomeView(), PreferencesView()];
 });
 
 final bottomNavIconsProvider = Provider<List<dynamic>>((ref) {

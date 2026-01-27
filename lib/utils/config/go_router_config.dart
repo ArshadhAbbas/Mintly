@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mintly/main.dart';
 import 'package:mintly/view/bottom_nav/view/bottom_nav_view.dart';
+import 'package:mintly/view/categories/categories_view.dart';
 import 'package:mintly/view/onboarding/view/onboarding_view.dart';
 
 class GoRouterConfig {
@@ -10,6 +11,7 @@ class GoRouterConfig {
     routes: [
       GoRouterRoute(pathRoute: OnBoardingView.path, pathRouteName: OnBoardingView.pathName, builder: (context, state) => OnBoardingView()),
       GoRouterRoute(pathRoute: BottomNavView.path, pathRouteName: BottomNavView.pathName, builder: (context, state) => BottomNavView()),
+      GoRouterRoute(pathRoute: CategoriesView.path, pathRouteName: CategoriesView.pathName, builder: (context, state) => CategoriesView()),
     ],
     errorBuilder: (context, state) => Scaffold(body: Center(child: Text(state.error.toString()))),
   );

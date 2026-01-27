@@ -19,20 +19,23 @@ class CategoriesModelAdapter extends TypeAdapter<CategoriesModel> {
     return CategoriesModel(
       categoryId: (fields[0] as num).toInt(),
       categoryName: fields[1] as String,
-      categoryIcon: fields[2] as HugeIcon,
+      categoryIcon: fields[2] as String,
+      subCategory: fields[3] as CategoriesModel?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CategoriesModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.categoryId)
       ..writeByte(1)
       ..write(obj.categoryName)
       ..writeByte(2)
-      ..write(obj.categoryIcon);
+      ..write(obj.categoryIcon)
+      ..writeByte(3)
+      ..write(obj.subCategory);
   }
 
   @override
