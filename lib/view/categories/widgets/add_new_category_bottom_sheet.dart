@@ -8,16 +8,35 @@ import 'package:mintly/utils/app_constants.dart/icons_list.dart';
 import 'package:mintly/utils/config/huge_icon_config.dart';
 import 'package:mintly/utils/widgets/app_text_field.dart';
 
-class AddNewCategoryBottomSheet extends StatefulWidget {
-  const AddNewCategoryBottomSheet({super.key, required this.onDone});
-  final Function( String categoryName) onDone;
+enum CategoryUpdate { edit, add }
+
+class AddNewCategoryBottomSheet extends ConsumerStatefulWidget {
+  const AddNewCategoryBottomSheet({super.key, required this.onDone, required this.updateType, this.updateText, this.updateIcon});
+  final Function(String categoryName) onDone;
+  final CategoryUpdate updateType;
+  final String? updateText;
+  final List<List<dynamic>>? updateIcon;
 
   @override
-  State<AddNewCategoryBottomSheet> createState() => _AddNewCategoryBottomSheetState();
+  ConsumerState<AddNewCategoryBottomSheet> createState() => _AddNewCategoryBottomSheetState();
 }
 
-class _AddNewCategoryBottomSheetState extends State<AddNewCategoryBottomSheet> {
+class _AddNewCategoryBottomSheetState extends ConsumerState<AddNewCategoryBottomSheet> {
   final TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (widget.updateType == CategoryUpdate.edit && widget.updateText != null) {
+        textEditingController.text = widget.updateText!;
+      }
+      if (widget.updateType == CategoryUpdate.edit && widget.updateIcon != null) {
+        ref.read(selectedCategoryIconControllerProvider.notifier).updateSelectedCategoryIcon(HugeIconConfig.stringify(widget.updateIcon!));
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -48,7 +67,7 @@ class _AddNewCategoryBottomSheetState extends State<AddNewCategoryBottomSheet> {
                 ),
               ),
               SizedBox(height: 10),
-              Row(  
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircleAvatar(

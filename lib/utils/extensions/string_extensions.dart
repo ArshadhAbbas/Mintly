@@ -26,7 +26,6 @@ extension StringExtensions on String {
     return result.join();
   }
 
-  String get toTitleCase {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
-  }
+  String get toCapitalized => length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
+  String get toTitleCase => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized).join(' ');
 }

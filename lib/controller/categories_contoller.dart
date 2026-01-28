@@ -3,6 +3,8 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/model/categories_model/categories_model.dart';
 import 'package:mintly/utils/app_constants.dart/hive_boxes.dart';
 import 'package:mintly/utils/config/huge_icon_config.dart';
+import 'package:mintly/utils/extensions/string_extensions.dart';
+import 'package:mintly/view/categories/widgets/add_new_category_bottom_sheet.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'categories_contoller.g.dart';
@@ -26,6 +28,33 @@ class CategoriesController extends _$CategoriesController {
   void deleteCategory(CategoriesModel category) {
     _box.delete(category.categoryId);
     state = AsyncValue.data(_box.values.toList());
+  }
+
+  void addOrEditSubCategory({
+    required CategoryUpdate categoryUpdateType,
+    required CategoriesModel category,
+    required String newCategoryName,
+    CategoriesModel? subCategory,
+  }) {
+    if (categoryUpdateType == CategoryUpdate.add) {
+      final List<CategoriesModel> updatedSubCategories = [
+        ...(category.subCategories ?? []),
+        CategoriesModel(
+          categoryId: newCategoryName.toLowerCase().replaceAll(" ", "_"),
+          categoryName: newCategoryName.toTitleCase.trim(),
+          categoryIcon: ref.read(selectedCategoryIconControllerProvider),
+        ),
+      ];
+      addNewCategory(category.copyWith(subCategories: updatedSubCategories));
+    } else {
+      final updatedSubCategories = (category.subCategories ?? []).map((sub) {
+        if (sub.categoryId == subCategory!.categoryId) {
+          return sub.copyWith(categoryName: newCategoryName.toTitleCase.trim(), categoryIcon: ref.read(selectedCategoryIconControllerProvider));
+        }
+        return sub;
+      }).toList();
+      addNewCategory(category.copyWith(subCategories: updatedSubCategories));
+    }
   }
 }
 

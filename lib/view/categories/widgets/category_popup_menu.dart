@@ -3,8 +3,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 
 class CategoryPopupMenu extends StatelessWidget {
-  const CategoryPopupMenu({super.key, this.child});
+  const CategoryPopupMenu({super.key, this.child, required this.update, required this.delete});
   final Widget? child;
+  final Function() update, delete;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class CategoryPopupMenu extends StatelessWidget {
           value: "edit",
           height: 10,
           padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+          onTap: update,
           child: Center(child: Text("Edit", style: TextStyleConstants.w400F12)),
         ),
         PopupMenuDivider(),

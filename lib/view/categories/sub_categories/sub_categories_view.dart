@@ -4,6 +4,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/controller/categories_contoller.dart';
 import 'package:mintly/model/categories_model/categories_model.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
+import 'package:mintly/utils/config/huge_icon_config.dart';
 import 'package:mintly/view/categories/widgets/add_new_category_bottom_sheet.dart';
 import 'package:mintly/view/categories/widgets/category_popup_menu.dart';
 import 'package:mintly/view/categories/widgets/category_tile.dart';
@@ -35,19 +36,23 @@ class SubCategoriesView extends ConsumerWidget {
               if (category.subCategories != null && category.subCategories!.isNotEmpty)
                 IconButton(
                   onPressed: () {
-                    showAddNewCategorySheet(context, category);
+                    showAddSubCategorySheet(context: context, category: category, categoryUpdateType: CategoryUpdate.add);
                   },
                   icon: HugeIcon(icon: HugeIcons.strokeRoundedResourcesAdd),
                 ),
-              CategoryPopupMenu(child: HugeIcon(icon: HugeIcons.strokeRoundedMoreHorizontalCircle01)),
-              SizedBox(width: 10)
+              CategoryPopupMenu(
+                child: HugeIcon(icon: HugeIcons.strokeRoundedMoreHorizontalCircle01),
+                delete: () {},
+                update: () {},
+              ),
+              SizedBox(width: 10),
             ],
           ),
           body: category.subCategories == null || category.subCategories!.isEmpty
               ? Center(
                   child: InkWell(
                     borderRadius: BorderRadius.circular(30),
-                    onTap: () => showAddNewCategorySheet(context, category),
+                    onTap: () => showAddSubCategorySheet(context: context, category: category, categoryUpdateType: CategoryUpdate.add),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Column(
@@ -79,7 +84,17 @@ class SubCategoriesView extends ConsumerWidget {
                   itemBuilder: (context, index) => CategoryTile(
                     categoryName: category.subCategories![index].categoryName,
                     categoryIcon: category.subCategories![index].categoryIcon,
-                    action: CategoryPopupMenu(),
+                    action: CategoryPopupMenu(
+                      delete: () {},
+                      update: () {
+                        showAddSubCategorySheet(
+                          context: context,
+                          category: category,
+                          categoryUpdateType: CategoryUpdate.edit,
+                          subCategory: category.subCategories![index],
+                        );
+                      },
+                    ),
                   ),
                   itemCount: category.subCategories!.length,
                 ),
@@ -88,7 +103,12 @@ class SubCategoriesView extends ConsumerWidget {
     );
   }
 
-  dynamic showAddNewCategorySheet(BuildContext context, CategoriesModel category) {
+  dynamic showAddSubCategorySheet({
+    required BuildContext context,
+    required CategoriesModel category,
+    required CategoryUpdate categoryUpdateType,
+    CategoriesModel? subCategory,
+  }) {
     return showModalBottomSheet(
       backgroundColor: Colors.transparent,
       useSafeArea: true,
@@ -97,16 +117,18 @@ class SubCategoriesView extends ConsumerWidget {
       builder: (context) => Consumer(
         builder: (context, ref, child) {
           return AddNewCategoryBottomSheet(
-            onDone: (categoryName) {
-              final List<CategoriesModel> updatedSubCategories = [
-                ...(category.subCategories ?? []),
-                CategoriesModel(
-                  categoryId: categoryName.toLowerCase(),
-                  categoryName: categoryName,
-                  categoryIcon: ref.read(selectedCategoryIconControllerProvider),
-                ),
-              ];
-              ref.read(categoriesControllerProvider.notifier).addNewCategory(category.copyWith(subCategories: updatedSubCategories));
+            updateText: categoryUpdateType == CategoryUpdate.edit ? subCategory!.categoryName : null,
+            updateIcon: categoryUpdateType == CategoryUpdate.edit ? HugeIconConfig.parse(subCategory!.categoryIcon) : null,
+            updateType: categoryUpdateType,
+            onDone: (newCategoryName) {
+              ref
+                  .read(categoriesControllerProvider.notifier)
+                  .addOrEditSubCategory(
+                    categoryUpdateType: categoryUpdateType,
+                    category: category,
+                    newCategoryName: newCategoryName,
+                    subCategory: subCategory,
+                  );
             },
           );
         },
