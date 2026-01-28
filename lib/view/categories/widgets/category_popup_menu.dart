@@ -26,6 +26,7 @@ class CategoryPopupMenu extends StatelessWidget {
         PopupMenuItem(
           value: "delete",
           height: 10,
+          onTap: delete,
           padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
           child: Center(
             child: Text("Delete", style: TextStyleConstants.w400F12.copyWith(color: Colors.red)),

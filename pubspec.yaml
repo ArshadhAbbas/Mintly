@@ -21,6 +21,7 @@ dependencies:
   hive_ce: ^2.18.0
   hive_ce_flutter: ^2.3.4
   hugeicons: ^1.1.5
+  lottie: ^3.3.2
   package_info_plus: ^9.0.0
   riverpod_annotation: ^4.0.0
   shared_preferences: ^2.5.4
@@ -53,6 +54,7 @@ flutter:
     - assets/general/
     - assets/bottom_nav/
     - assets/cards/
+    - assets/animations/
     # - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

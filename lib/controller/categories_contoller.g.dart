@@ -35,7 +35,7 @@ final class CategoriesControllerProvider
 }
 
 String _$categoriesControllerHash() =>
-    r'70f2419d285eaa5c68951f8cdfa4155a9549c3ca';
+    r'0299e522207e21045ed9b70642d542b9ae2c43d7';
 
 abstract class _$CategoriesController
     extends $AsyncNotifier<List<CategoriesModel>> {

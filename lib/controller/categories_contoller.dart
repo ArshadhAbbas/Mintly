@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hive_ce/hive_ce.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/model/categories_model/categories_model.dart';
@@ -25,8 +27,8 @@ class CategoriesController extends _$CategoriesController {
     state = AsyncValue.data(_box.values.toList());
   }
 
-  void deleteCategory(CategoriesModel category) {
-    _box.delete(category.categoryId);
+  void deleteCategory(String categoryId) {
+    _box.delete(categoryId);
     state = AsyncValue.data(_box.values.toList());
   }
 
@@ -49,13 +51,24 @@ class CategoriesController extends _$CategoriesController {
     } else {
       final updatedSubCategories = (category.subCategories ?? []).map((sub) {
         if (sub.categoryId == subCategory!.categoryId) {
-          return sub.copyWith(categoryName: newCategoryName.toTitleCase.trim(), categoryIcon: ref.read(selectedCategoryIconControllerProvider));
+          return sub.copyWith(
+            categoryName: newCategoryName.toTitleCase.trim(),
+            categoryIcon: ref.read(selectedCategoryIconControllerProvider),
+          );
         }
         return sub;
       }).toList();
       addNewCategory(category.copyWith(subCategories: updatedSubCategories));
     }
   }
+
+  void deleteSubCategory({required CategoriesModel category, required String subCategoryId}) {
+    final updatedSubCategories = (category.subCategories ?? []).where((sub) => sub.categoryId != subCategoryId).toList();
+    final updatedCategory = category.copyWith(subCategories: updatedSubCategories);
+    _box.put(updatedCategory.categoryId, updatedCategory);
+    state = AsyncValue.data(_box.values.toList());
+  }
+
 }
 
 @riverpod

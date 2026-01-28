@@ -16,7 +16,7 @@ final TextEditingController textEditingController;
         filled: false,
         hintText: hintText,
         labelText: hintText,
-        labelStyle: TextStyleConstants.w400F12,
+        labelStyle: TextStyleConstants.w400F12.copyWith(color: Colors.black),
         alignLabelWithHint: true,
         hintStyle: TextStyleConstants.w400F12.copyWith(color: Colors.black.withValues(alpha: 0.2)),
         enabledBorder: OutlineInputBorder(
