@@ -10,7 +10,7 @@ class SpendActionButtonsList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SizedBox(
-        height: context.isMobile ? null : context.screenWidth * 0.25,
+        height: context.isMobile ? null : context.screenWidth * 0.35,
         width: context.isMobile ? double.infinity : (context.screenWidth / 2) - 40,
         child: Flex(
           direction: context.isMobile ? Axis.horizontal : Axis.vertical,
