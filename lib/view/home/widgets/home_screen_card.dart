@@ -1,8 +1,10 @@
+import 'package:card_scanner/models/card_issuer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mintly/controller/card_switch_controller.dart';
 import 'package:mintly/model/card_model.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
+import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/card_extensions.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
@@ -10,17 +12,10 @@ import 'package:mintly/utils/extensions/string_extensions.dart';
 import 'package:mintly/view/home/widgets/card_switch.dart';
 
 class HomeScreenCard extends StatelessWidget {
-  const HomeScreenCard({super.key});
-
+  const HomeScreenCard({super.key, required this.cardModel});
+  final CardModel cardModel;
   @override
   Widget build(BuildContext context) {
-    CardModel cardModel = CardModel(
-      cardType: CardTypes.master,
-      currency: CurrencyType.inr,
-      balance: 100,
-      expiry: "96/825",
-      cardNumber: "100000000000",
-    );
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
@@ -36,13 +31,19 @@ class HomeScreenCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(height: constraints.maxHeight / 10),
+
               Padding(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
                 child: Row(
                   children: [
-                    cardModel.cardIcon,
-                    Spacer(),
-                    Text(cardModel.currency.name.toUpperCase(), style: TextStyleConstants.w600F14),
+                    if (cardModel.cardType != null)
+                      CardIssuer.values
+                          .firstWhere(
+                            (element) =>
+                                element.name.toLowerCase().replaceAll(" ", "") == cardModel.cardType?.toLowerCase().replaceAll(" ", ""),
+                          )
+                          .getCardIcon
+                          else SizedBox(height: 20,)
                   ],
                 ),
               ),
@@ -84,14 +85,14 @@ class HomeScreenCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("${cardModel.currency.getCurrency}${cardModel.balance}", style: TextStyleConstants.w600F16),
+                        Text("${StringConstants.rupeeIcon} ${cardModel.balance}", style: TextStyleConstants.w600F16),
                         Text(cardModel.expiry, style: TextStyleConstants.w400F12),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: constraints.maxHeight/15,)
+              SizedBox(height: constraints.maxHeight / 15),
             ],
           ),
         );

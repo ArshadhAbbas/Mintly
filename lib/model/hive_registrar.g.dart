@@ -3,16 +3,18 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
-import 'package:mintly/model/categories_model/categories_model.dart';
+import 'package:mintly/model/models.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(CardModelAdapter());
     registerAdapter(CategoriesModelAdapter());
   }
 }
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
+    registerAdapter(CardModelAdapter());
     registerAdapter(CategoriesModelAdapter());
   }
 }

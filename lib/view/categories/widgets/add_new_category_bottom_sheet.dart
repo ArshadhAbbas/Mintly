@@ -5,11 +5,11 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/controller/categories_contoller.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/icons_list.dart';
-import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/config/huge_icon_config.dart';
 import 'package:mintly/utils/extensions/buildcontext_extensions.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
 import 'package:mintly/utils/widgets/app_text_field.dart';
+import 'package:mintly/utils/widgets/black_button.dart';
 
 enum CategoryUpdate { edit, add }
 
@@ -108,14 +108,14 @@ class _AddNewCategoryBottomSheetState extends ConsumerState<AddNewCategoryBottom
                     ),
                   ),
                 ),
-                SizedBox(height: 60)
+                SizedBox(height: 60),
               ],
             ),
           ),
-      
+
           Align(
             alignment: AlignmentGeometry.bottomCenter,
-            child: InkWell(
+            child: BlackButton(
               onTap: () {
                 if (textEditingController.text.isEmpty || textEditingController.text == "") {
                   context.showSnackBar("Category Name Cannot be empty");
@@ -124,18 +124,7 @@ class _AddNewCategoryBottomSheetState extends ConsumerState<AddNewCategoryBottom
                   context.pop();
                 }
               },
-              child: Container(
-                height: 60,
-                margin: EdgeInsets.all(12),
-                width: double.infinity,
-                decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                  child: Text(
-                    widget.updateType == CategoryUpdate.add ? "Save" : "Update",
-                    style: TextStyleConstants.w400F18.copyWith(color: Colors.white),
-                  ),
-                ),
-              ),
+              text: widget.updateType == CategoryUpdate.add ? "Save" : "Update",
             ),
           ),
         ],

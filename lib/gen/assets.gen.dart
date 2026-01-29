@@ -47,6 +47,39 @@ class $AssetsBottomNavGen {
 class $AssetsCardsGen {
   const $AssetsCardsGen();
 
+  /// File path: assets/cards/Insta_pay_logo.svg
+  SvgGenImage get instaPayLogo =>
+      const SvgGenImage('assets/cards/Insta_pay_logo.svg');
+
+  /// File path: assets/cards/amex.svg
+  SvgGenImage get amex => const SvgGenImage('assets/cards/amex.svg');
+
+  /// File path: assets/cards/bank_of_korea.svg
+  SvgGenImage get bankOfKorea =>
+      const SvgGenImage('assets/cards/bank_of_korea.svg');
+
+  /// File path: assets/cards/bc_global.svg
+  SvgGenImage get bcGlobal => const SvgGenImage('assets/cards/bc_global.svg');
+
+  /// File path: assets/cards/carte_blanche.svg
+  SvgGenImage get carteBlanche =>
+      const SvgGenImage('assets/cards/carte_blanche.svg');
+
+  /// File path: assets/cards/diners_club_logo.svg
+  SvgGenImage get dinersClubLogo =>
+      const SvgGenImage('assets/cards/diners_club_logo.svg');
+
+  /// File path: assets/cards/discover_logo.svg
+  SvgGenImage get discoverLogo =>
+      const SvgGenImage('assets/cards/discover_logo.svg');
+
+  /// File path: assets/cards/jcb.svg
+  SvgGenImage get jcb => const SvgGenImage('assets/cards/jcb.svg');
+
+  /// File path: assets/cards/maestro_logo.svg
+  SvgGenImage get maestroLogo =>
+      const SvgGenImage('assets/cards/maestro_logo.svg');
+
   /// File path: assets/cards/mastercard.svg
   SvgGenImage get mastercard =>
       const SvgGenImage('assets/cards/mastercard.svg');
@@ -54,8 +87,33 @@ class $AssetsCardsGen {
   /// File path: assets/cards/rupay.svg
   SvgGenImage get rupay => const SvgGenImage('assets/cards/rupay.svg');
 
+  /// File path: assets/cards/solo_pay.svg
+  SvgGenImage get soloPay => const SvgGenImage('assets/cards/solo_pay.svg');
+
+  /// File path: assets/cards/union_pay_logo.svg
+  SvgGenImage get unionPayLogo =>
+      const SvgGenImage('assets/cards/union_pay_logo.svg');
+
+  /// File path: assets/cards/visa_logo.svg
+  SvgGenImage get visaLogo => const SvgGenImage('assets/cards/visa_logo.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [mastercard, rupay];
+  List<SvgGenImage> get values => [
+    instaPayLogo,
+    amex,
+    bankOfKorea,
+    bcGlobal,
+    carteBlanche,
+    dinersClubLogo,
+    discoverLogo,
+    jcb,
+    maestroLogo,
+    mastercard,
+    rupay,
+    soloPay,
+    unionPayLogo,
+    visaLogo,
+  ];
 }
 
 class $AssetsGeneralGen {

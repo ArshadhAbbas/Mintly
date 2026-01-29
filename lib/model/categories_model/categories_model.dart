@@ -1,8 +1,3 @@
-import 'package:hive_ce/hive_ce.dart';
-
-@GenerateAdapters([AdapterSpec<CategoriesModel>()])
-part 'categories_model.g.dart';
-
 class CategoriesModel {
   String categoryId;
   String categoryName;

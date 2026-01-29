@@ -24,7 +24,6 @@ class SubCategoriesView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Timer? deleteTimer;
     final categoriesAsync = ref.watch(categoriesControllerProvider);
     return categoriesAsync.when(
       loading: () => Scaffold(

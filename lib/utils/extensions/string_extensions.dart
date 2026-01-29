@@ -1,3 +1,5 @@
+
+
 extension StringExtensions on String {
   String splitStringByLength({required int splitLength}) {
     List<String> result = [];
@@ -25,6 +27,7 @@ extension StringExtensions on String {
     }
     return result.join();
   }
+
 
   String get toCapitalized => length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
   String get toTitleCase => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized).join(' ');

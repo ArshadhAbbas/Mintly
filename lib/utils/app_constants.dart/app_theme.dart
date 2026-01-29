@@ -9,7 +9,11 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.white,
       primaryColor: AppColors.lime,
-
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Colors.black,
+        selectionColor: Colors.grey,
+        selectionHandleColor: Colors.black,
+      ),
       textTheme: TextTheme(
         headlineLarge: TextStyleConstants.w700F28,
         headlineMedium: TextStyleConstants.w600F22,
@@ -32,7 +36,6 @@ class AppTheme {
       ),
 
       dividerTheme: DividerThemeData(color: AppColors.dividerLight, thickness: 1),
-
       iconTheme: const IconThemeData(color: AppColors.textPrimaryLight, size: 22),
 
       appBarTheme: const AppBarTheme(
@@ -55,6 +58,7 @@ class AppTheme {
       ),
 
       inputDecorationTheme: InputDecorationTheme(
+        // change cursor color
         filled: true,
         fillColor: AppColors.lightSurface,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),

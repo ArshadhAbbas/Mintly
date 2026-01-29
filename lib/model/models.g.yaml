@@ -5,7 +5,7 @@ nextTypeId: 2
 types:
   CategoriesModel:
     typeId: 0
-    nextIndex: 6
+    nextIndex: 4
     fields:
       categoryId:
         index: 0
@@ -14,4 +14,18 @@ types:
       categoryIcon:
         index: 2
       subCategories:
-        index: 5
+        index: 3
+  CardModel:
+    typeId: 1
+    nextIndex: 5
+    fields:
+      cardId:
+        index: 0
+      cardType:
+        index: 1
+      cardNumber:
+        index: 2
+      balance:
+        index: 3
+      expiry:
+        index: 4

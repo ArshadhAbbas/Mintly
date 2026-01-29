@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mintly/gen/assets.gen.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 
 class DeletingPopUp extends StatelessWidget {
@@ -27,7 +28,7 @@ class DeletingPopUp extends StatelessWidget {
               decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.appThemeYellow),
               child: ColorFiltered(
                 colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                child: Lottie.asset("assets/animations/shredder.json", repeat: false, reverse: false, animate: true),
+                child: Lottie.asset(Assets.animations.shredder.path, repeat: false, reverse: false, animate: true),
               ),
             ),
             SizedBox(height: 10),
