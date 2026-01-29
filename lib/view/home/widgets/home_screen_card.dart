@@ -43,7 +43,8 @@ class HomeScreenCard extends StatelessWidget {
                                 element.name.toLowerCase().replaceAll(" ", "") == cardModel.cardType?.toLowerCase().replaceAll(" ", ""),
                           )
                           .getCardIcon
-                          else SizedBox(height: 20,)
+                    else
+                      SizedBox(height: 20),
                   ],
                 ),
               ),
