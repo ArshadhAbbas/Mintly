@@ -55,7 +55,7 @@ class _AddNewBankAccountState extends State<AddNewBankAccount> {
                   Text("Bank Name", style: TextStyleConstants.w400F14),
                   SizedBox(height: 6),
                   AddCardTextField(
-                    textEdingController: ifsController,
+                    textEdingController: bankNameController,
                     hintText: "ABC BANK",
                     textInputAction: TextInputAction.next,
                     inputFormatters: [LengthLimitingTextInputFormatter(11)],
@@ -86,9 +86,10 @@ class _AddNewBankAccountState extends State<AddNewBankAccount> {
                   SizedBox(height: 6),
                   AddCardTextField(
                     textEdingController: balanceController,
-                    hintText: StringConstants.rupeeIcon,
+                    hintText: "123",
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.number,
+                    prefix: Text(StringConstants.rupeeIcon),
                   ),
                 ],
               ),
@@ -101,11 +102,10 @@ class _AddNewBankAccountState extends State<AddNewBankAccount> {
           return BlackButton(
             onTap: () {
               if ([
-                bankNameController.text,
-                accountNumberController.text,
-                ifsController.text,
-                balanceController.text,
-              ].any((element) => element.trim().isEmpty)) {
+                bankNameController,
+                accountNumberController,
+                ifsController,
+              ].any((element) => element.text.trim().isEmpty)) {
                 context.showSnackBar("Please fill all the mandatory fields");
                 return;
               } else {
@@ -118,7 +118,9 @@ class _AddNewBankAccountState extends State<AddNewBankAccount> {
                         bankName: bankNameController.text.trim(),
                         accountNumber: accountNumberController.text.trim().replaceAll(" ", ""),
                         ifscCode: ifsController.text.trim().replaceAll(" ", ""),
-                        accountBalance: num.parse(balanceController.text.trim()),
+                        accountBalance: balanceController.text.isEmpty
+                            ? 0
+                            : num.parse(balanceController.text.trim()),
                       ),
                     );
               }

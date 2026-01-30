@@ -11,6 +11,7 @@ class AddCardTextField extends StatelessWidget {
     this.textInputType,
     this.textInputAction,
     this.maxLength,
+    this.prefix,
   });
 
   final TextEditingController textEdingController;
@@ -19,6 +20,7 @@ class AddCardTextField extends StatelessWidget {
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
   final int? maxLength;
+  final Widget? prefix;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,11 @@ class AddCardTextField extends StatelessWidget {
       maxLength: maxLength,
       textInputAction: textInputAction ?? TextInputAction.next,
       decoration: InputDecoration(
+        prefixIcon: Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Center(child: prefix)),
+        prefixIconColor: Colors.black.withValues(alpha: 0.5),
+        prefixIconConstraints: prefix != null
+            ? BoxConstraints(maxWidth: 20, maxHeight: 20)
+            : BoxConstraints(maxWidth: 0, maxHeight: 0),
         counterText: "",
         filled: false,
         border: OutlineInputBorder(),

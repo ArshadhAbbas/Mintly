@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:mintly/model/bank_accounts_model.dart';
 import 'package:mintly/model/card_model.dart';
+import 'package:mintly/model/cash_model.dart';
 import 'package:mintly/model/categories_model.dart';
 import 'package:mintly/model/hive_registrar.g.dart';
 import 'package:mintly/utils/app_constants.dart/app_theme.dart';
@@ -20,6 +21,7 @@ void main() async {
   await Hive.openBox<CategoriesModel>(HiveBoxes.categoriesBox);
   await Hive.openBox<CardModel>(HiveBoxes.cardsBox);
   await Hive.openBox<BankAccountsModel>(HiveBoxes.banksBox);
+  await Hive.openBox<CashModel>(HiveBoxes.cashBox);
   runApp(ProviderScope(child: const MintlyApp()));
 }
 

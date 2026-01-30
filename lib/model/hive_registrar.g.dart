@@ -9,6 +9,7 @@ extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(BankAccountsModelAdapter());
     registerAdapter(CardModelAdapter());
+    registerAdapter(CashModelAdapter());
     registerAdapter(CategoriesModelAdapter());
   }
 }
@@ -17,6 +18,7 @@ extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(BankAccountsModelAdapter());
     registerAdapter(CardModelAdapter());
+    registerAdapter(CashModelAdapter());
     registerAdapter(CategoriesModelAdapter());
   }
 }
