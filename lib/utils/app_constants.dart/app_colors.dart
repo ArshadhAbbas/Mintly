@@ -33,4 +33,5 @@ class AppColors {
   static const Color dividerDark = Color(0xFF2A2A2A);
 
   static const Color appThemeYellow =Color(0xFFEEF490);
+  static const Color appThemeGreen =  Color(0xFF097A0D);
 }

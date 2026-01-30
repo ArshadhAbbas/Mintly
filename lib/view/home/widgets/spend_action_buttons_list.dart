@@ -36,14 +36,14 @@ class SpendActionButtonsList extends StatelessWidget {
               buttonText: "Receive",
             ),
 
-            SpendActionButton(
-              isFilled: false,
-              icon: Icon(Icons.call_split_rounded, size: context.isMobile ? null : context.screenWidth / 50),
-              buttonText: "Split",
-              onTap: () {
-                print("Split");
-              },
-            ),
+            // SpendActionButton(
+            //   isFilled: false,
+            //   icon: Icon(Icons.call_split_rounded, size: context.isMobile ? null : context.screenWidth / 50),
+            //   buttonText: "Split",
+            //   onTap: () {
+            //     print("Split");
+            //   },
+            // ),
           ],
         ),
       ),

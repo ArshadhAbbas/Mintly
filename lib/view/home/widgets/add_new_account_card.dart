@@ -3,8 +3,8 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 
-class AddCard extends StatelessWidget {
-  const AddCard({super.key, required this.onTap, });
+class AddNewAccountCard extends StatelessWidget {
+  const AddNewAccountCard({super.key, required this.onTap, });
   final VoidCallback onTap;
 
   @override

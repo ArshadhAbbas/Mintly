@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/controller/banks_cards_controller.dart';
+import 'package:mintly/model/bank_accounts_model.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
@@ -9,8 +10,9 @@ import 'package:mintly/utils/extensions/string_extensions.dart';
 import 'package:mintly/view/home/widgets/card_switch.dart';
 
 class HomeScreenBankCard extends StatelessWidget {
-  const HomeScreenBankCard({super.key, required this.index});
+  const HomeScreenBankCard({super.key, required this.index, required this.bankAccountsModel});
   final int index;
+  final BankAccountsModel bankAccountsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,9 @@ class HomeScreenBankCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                isShowing ? "4676567675757567" : "4676567675757567".starred,
+                                isShowing
+                                    ? bankAccountsModel.accountNumber
+                                    : bankAccountsModel.accountNumber.starred,
                                 style: TextStyleConstants.w700F16,
                               ),
                               Spacer(),
@@ -90,7 +94,9 @@ class HomeScreenBankCard extends StatelessWidget {
                               ),
                               children: [
                                 TextSpan(
-                                  text: isShowing ? "HDFC123400" : "HDFC123400".starred,
+                                  text: isShowing
+                                      ? bankAccountsModel.ifscCode
+                                      : bankAccountsModel.ifscCode.starred,
                                   style: TextStyleConstants.w700F12.copyWith(
                                     color: Colors.black.withValues(alpha: 0.6),
                                   ),
@@ -112,7 +118,7 @@ class HomeScreenBankCard extends StatelessWidget {
                       "Available Balance",
                       style: TextStyleConstants.w400F12.copyWith(color: Colors.black),
                     ),
-                    Text("${StringConstants.rupeeIcon} 10000", style: TextStyleConstants.w600F16),
+                    Text("${StringConstants.rupeeIcon} ${bankAccountsModel.accountBalance}", style: TextStyleConstants.w600F16),
                   ],
                 ),
                 SizedBox(height: constraints.maxHeight / 15),

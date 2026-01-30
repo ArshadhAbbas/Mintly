@@ -6,6 +6,7 @@ import 'package:mintly/utils/extensions/media_query_extensions.dart';
 import 'package:mintly/view/home/widgets/account_selection_chip.dart';
 import 'package:mintly/view/home/widgets/home_screen_banks_list.dart';
 import 'package:mintly/view/home/widgets/home_screen_cards_list.dart';
+import 'package:mintly/view/home/widgets/home_screen_cash_card.dart';
 import 'package:mintly/view/home/widgets/recent_transactions_list.dart';
 import 'package:mintly/view/home/widgets/spend_action_buttons_list.dart';
 
@@ -38,7 +39,9 @@ class HomeView extends StatelessWidget {
 
                       return selectedAccountType == AccountType.cards
                           ? HomeScreenCardsList()
-                          : HomeScreenBanksList();
+                          : selectedAccountType == AccountType.bank
+                          ? HomeScreenBanksList()
+                          : HomeScreenCashCard();
                     },
                   ),
                 ],

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/controller/categories_contoller.dart';
-import 'package:mintly/model/categories_model/categories_model.dart';
+import 'package:mintly/model/categories_model.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/config/huge_icon_config.dart';
 import 'package:mintly/view/categories/widgets/add_new_category_bottom_sheet.dart';

@@ -20,6 +20,8 @@ import 'package:mintly/view/card_scanner/widgets/add_card_dropdown.dart';
 import 'package:mintly/view/card_scanner/widgets/add_card_text_field.dart';
 
 class AddCardView extends StatefulWidget {
+  static const String path = "/add_card";
+  static const String pathName = "add_card";
   const AddCardView({super.key});
 
   @override
@@ -47,7 +49,9 @@ class _AddCardViewState extends State<AddCardView> {
               SizedBox(height: 20),
               Text(
                 "Enter your card details manually or scan your card to auto-fill",
-                style: TextStyleConstants.w400F14.copyWith(color: Colors.black.withValues(alpha: 0.3)),
+                style: TextStyleConstants.w400F14.copyWith(
+                  color: Colors.black.withValues(alpha: 0.3),
+                ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
@@ -62,13 +66,18 @@ class _AddCardViewState extends State<AddCardView> {
                   );
                   if (cardDetails != null) {
                     cardHolderNameController.text = cardDetails.cardHolderName;
-                    cardNumberController.text = cardDetails.cardNumber.splitStringByLength(splitLength: 4);
+                    cardNumberController.text = cardDetails.cardNumber.splitStringByLength(
+                      splitLength: 4,
+                    );
                     expirationDateController.text = cardDetails.expiryDate;
                     cardTypeController.text = CardIssuer.values
                         .firstWhere(
                           (element) =>
                               element.name.replaceAll(" ", "_").toLowerCase() ==
-                              cardDetails.cardIssuer.replaceAll(" ", "_").replaceAll("CardIssuer.", "").toLowerCase(),
+                              cardDetails.cardIssuer
+                                  .replaceAll(" ", "_")
+                                  .replaceAll("CardIssuer.", "")
+                                  .toLowerCase(),
                           orElse: () => CardIssuer.unknown,
                         )
                         .name
@@ -104,14 +113,22 @@ class _AddCardViewState extends State<AddCardView> {
                   AddCardTextField(
                     textEdingController: cardNumberController,
                     hintText: "************".splitStringByLength(splitLength: 4),
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(16), CardNumberFormatter()],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(16),
+                      CardNumberFormatter(),
+                    ],
                     textInputType: TextInputType.numberWithOptions(),
                     textInputAction: TextInputAction.next,
                   ),
                   SizedBox(height: 15),
                   Text("Cardholder Name", style: TextStyleConstants.w400F14),
                   SizedBox(height: 6),
-                  AddCardTextField(textEdingController: cardHolderNameController, hintText: "Name", textInputAction: TextInputAction.next),
+                  AddCardTextField(
+                    textEdingController: cardHolderNameController,
+                    hintText: "Name",
+                    textInputAction: TextInputAction.next,
+                  ),
                   SizedBox(height: 15),
                   Text("Expiry Date", style: TextStyleConstants.w400F14),
                   SizedBox(height: 6),
@@ -137,7 +154,9 @@ class _AddCardViewState extends State<AddCardView> {
                             Text("Card Type", style: TextStyleConstants.w400F14),
                             SizedBox(height: 6),
                             AddCardDropDown(
-                              dropdownMenuEntries: CardIssuer.values.map((e) => DropdownMenuEntry(value: e, label: e.titleCase)).toList(),
+                              dropdownMenuEntries: CardIssuer.values
+                                  .map((e) => DropdownMenuEntry(value: e, label: e.titleCase))
+                                  .toList(),
                               controller: cardTypeController,
                             ),
                           ],
@@ -172,7 +191,11 @@ class _AddCardViewState extends State<AddCardView> {
         builder: (context, ref, child) {
           return BlackButton(
             onTap: () {
-              final fields = [balanceController.text, expirationDateController.text, cardNumberController.text];
+              final fields = [
+                balanceController.text,
+                expirationDateController.text,
+                cardNumberController.text,
+              ];
 
               if (fields.any((e) => e.trim().isEmpty)) {
                 context.showSnackBar("Please fill all the mandatory fields");
@@ -187,7 +210,9 @@ class _AddCardViewState extends State<AddCardView> {
                     .addNewCard(
                       CardModel(
                         cardId: cards.isEmpty ? 0 : cards.last.cardId + 1,
-                        cardType: cardTypeController.text.isEmpty ? null : cardTypeController.text.trim(),
+                        cardType: cardTypeController.text.isEmpty
+                            ? null
+                            : cardTypeController.text.trim(),
                         balance: num.parse(balanceController.text.trim()),
                         expiry: expirationDateController.text.trim(),
                         cardNumber: cardNumberController.text.replaceAll(" ", "").trim(),
