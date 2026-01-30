@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
-import 'package:mintly/view/card_scanner/add_card_view.dart';
 
 class AddCard extends StatelessWidget {
-  const AddCard({super.key});
+  const AddCard({super.key, required this.onTap, });
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return InkWell(
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddCardView())),
+          onTap: onTap,
           child: Container(
             margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             decoration: BoxDecoration(
@@ -28,7 +28,7 @@ class AddCard extends StatelessWidget {
               children: [
                 HugeIcon(icon: HugeIcons.strokeRoundedAddCircle, size: 35),
                 SizedBox(height: 10),
-                Center(child: Text("Add New Card", style: TextStyleConstants.w400F14)),
+                Center(child: Text("Add New", style: TextStyleConstants.w400F14)),
               ],
             ),
           ),

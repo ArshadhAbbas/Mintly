@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mintly/controller/card_switch_controller.dart';
 import 'package:mintly/controller/cards_controller.dart';
 import 'package:mintly/model/card_model.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
+import 'package:mintly/view/card_scanner/add_card_view.dart';
 import 'package:mintly/view/home/widgets/add_card.dart';
 import 'package:mintly/view/home/widgets/home_screen_card.dart';
 
@@ -31,12 +31,18 @@ class HomeScreenCardsList extends ConsumerWidget {
                     // onTap: () => ref.read(cardsControllerProvider.notifier).deleteCard(cards[index].cardId),
                     child: HomeScreenCard(cardModel: cards[index]),
                   )
-                : AddCard(),
+                : AddCard(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddCardView()),
+                    ),
+                  ),
             options: CarouselOptions(
               viewportFraction: 1,
               autoPlay: false,
               enableInfiniteScroll: false,
-              onPageChanged: (index, reason) => ref.read(cardIndicatorControllerProvider.notifier).updateCardIndicator(index),
+              onPageChanged: (index, reason) =>
+                  ref.read(cardIndicatorControllerProvider.notifier).updateCardIndicator(index),
             ),
           ),
         ),
