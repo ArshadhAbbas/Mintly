@@ -30,15 +30,13 @@ class CardsController extends _$CardsController {
 @riverpod
 class CardSwitchController extends _$CardSwitchController {
   @override
-  bool build() => false;
+  bool build(int index) => false;
 
   void updateCardSwitch() {
     state = !state;
   }
 }
 
-@riverpod
-bool cardSwitchStateController(Ref ref) => ref.watch(cardSwitchControllerProvider);
 
 @riverpod
 class CardIndicatorController extends _$CardIndicatorController {
@@ -49,6 +47,3 @@ class CardIndicatorController extends _$CardIndicatorController {
     state = newIndex;
   }
 }
-
-@riverpod
-int cardIndicatorStateController(Ref ref) => ref.watch(cardIndicatorControllerProvider);

@@ -3,7 +3,8 @@ part 'banks_cards_controller.g.dart';
 
 @riverpod
 class BanksCardsSwitchController extends _$BanksCardsSwitchController{
-  bool build()=>false;
+  @override
+  bool build(int index)=>false;
   void updateSwitch(){
     state=!state;
   }
@@ -12,6 +13,7 @@ class BanksCardsSwitchController extends _$BanksCardsSwitchController{
 
 @riverpod
 class BankCardsIndicatorController extends _$BankCardsIndicatorController{
+  @override
   int build()=>0;
   void updateCardIndicator(int newIndex){
     state= newIndex;

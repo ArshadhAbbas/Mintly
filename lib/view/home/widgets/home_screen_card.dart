@@ -12,8 +12,9 @@ import 'package:mintly/utils/extensions/string_extensions.dart';
 import 'package:mintly/view/home/widgets/card_switch.dart';
 
 class HomeScreenCard extends StatelessWidget {
-  const HomeScreenCard({super.key, required this.cardModel});
+  const HomeScreenCard({super.key, required this.cardModel, required this.index});
   final CardModel cardModel;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -44,15 +45,13 @@ class HomeScreenCard extends StatelessWidget {
                                 cardModel.cardType?.toLowerCase().replaceAll(" ", ""),
                           )
                           .getCardIcon
-                    else
-                      SizedBox(height: 20),
                   ],
                 ),
               ),
               SizedBox(height: constraints.maxHeight / 6),
               Consumer(
                 builder: (context, ref, child) {
-                  final bool shouldShowText = ref.watch(cardSwitchControllerProvider);
+                  final bool shouldShowText = ref.watch(cardSwitchControllerProvider(index));
                   return Container(
                     height: 40,
                     padding: EdgeInsets.symmetric(horizontal: 15),
@@ -71,9 +70,9 @@ class HomeScreenCard extends StatelessWidget {
                           ),
                         ),
                         CardSwitch(
-                          currentValue: ref.read(cardSwitchControllerProvider),
+                          currentValue: ref.read(cardSwitchControllerProvider(index)),
                           onTap: () =>
-                              ref.read(cardSwitchControllerProvider.notifier).updateCardSwitch(),
+                              ref.read(cardSwitchControllerProvider(index).notifier).updateCardSwitch(),
                         ),
                       ],
                     ),

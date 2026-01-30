@@ -62,23 +62,30 @@ abstract class _$CardsController extends $Notifier<List<CardModel>> {
 }
 
 @ProviderFor(CardSwitchController)
-final cardSwitchControllerProvider = CardSwitchControllerProvider._();
+final cardSwitchControllerProvider = CardSwitchControllerFamily._();
 
 final class CardSwitchControllerProvider
     extends $NotifierProvider<CardSwitchController, bool> {
-  CardSwitchControllerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'cardSwitchControllerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
+  CardSwitchControllerProvider._({
+    required CardSwitchControllerFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'cardSwitchControllerProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$cardSwitchControllerHash();
+
+  @override
+  String toString() {
+    return r'cardSwitchControllerProvider'
+        ''
+        '($argument)';
+  }
 
   @$internal
   @override
@@ -91,13 +98,44 @@ final class CardSwitchControllerProvider
       providerOverride: $SyncValueProvider<bool>(value),
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CardSwitchControllerProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$cardSwitchControllerHash() =>
-    r'4dfb6f1d6c33b5a916f772531eb927422f4968a9';
+    r'ed636b2670ffa6bcf576f366b4a33c8821f5ff68';
+
+final class CardSwitchControllerFamily extends $Family
+    with $ClassFamilyOverride<CardSwitchController, bool, bool, bool, int> {
+  CardSwitchControllerFamily._()
+    : super(
+        retry: null,
+        name: r'cardSwitchControllerProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  CardSwitchControllerProvider call(int index) =>
+      CardSwitchControllerProvider._(argument: index, from: this);
+
+  @override
+  String toString() => r'cardSwitchControllerProvider';
+}
 
 abstract class _$CardSwitchController extends $Notifier<bool> {
-  bool build();
+  late final _$args = ref.$arg as int;
+  int get index => _$args;
+
+  bool build(int index);
   @$mustCallSuper
   @override
   void runBuild() {
@@ -110,51 +148,9 @@ abstract class _$CardSwitchController extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    element.handleCreate(ref, () => build(_$args));
   }
 }
-
-@ProviderFor(cardSwitchStateController)
-final cardSwitchStateControllerProvider = CardSwitchStateControllerProvider._();
-
-final class CardSwitchStateControllerProvider
-    extends $FunctionalProvider<bool, bool, bool>
-    with $Provider<bool> {
-  CardSwitchStateControllerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'cardSwitchStateControllerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$cardSwitchStateControllerHash();
-
-  @$internal
-  @override
-  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  bool create(Ref ref) {
-    return cardSwitchStateController(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(bool value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<bool>(value),
-    );
-  }
-}
-
-String _$cardSwitchStateControllerHash() =>
-    r'00838109df6dafcd3592216378b4e26920ad3b95';
 
 @ProviderFor(CardIndicatorController)
 final cardIndicatorControllerProvider = CardIndicatorControllerProvider._();
@@ -208,46 +204,3 @@ abstract class _$CardIndicatorController extends $Notifier<int> {
     element.handleCreate(ref, build);
   }
 }
-
-@ProviderFor(cardIndicatorStateController)
-final cardIndicatorStateControllerProvider =
-    CardIndicatorStateControllerProvider._();
-
-final class CardIndicatorStateControllerProvider
-    extends $FunctionalProvider<int, int, int>
-    with $Provider<int> {
-  CardIndicatorStateControllerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'cardIndicatorStateControllerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$cardIndicatorStateControllerHash();
-
-  @$internal
-  @override
-  $ProviderElement<int> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  int create(Ref ref) {
-    return cardIndicatorStateController(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(int value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<int>(value),
-    );
-  }
-}
-
-String _$cardIndicatorStateControllerHash() =>
-    r'531b88285fc13cab4c95ab110d17555e260f2062';

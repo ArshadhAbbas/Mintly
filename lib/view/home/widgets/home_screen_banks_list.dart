@@ -26,7 +26,7 @@ class HomeScreenBanksList extends ConsumerWidget {
             itemBuilder: (context, index, realIndex) => LayoutBuilder(
               builder: (context, constraints) {
                 return index == 0
-                    ? InkWell(child: HomeScreenBankCard())
+                    ? InkWell(child: HomeScreenBankCard(index: index))
                     : AddCard(
                         onTap: () => Navigator.push(
                           context,
@@ -58,7 +58,7 @@ class HomeScreenBanksList extends ConsumerWidget {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
-                  width: index == ref.watch(bankCardsIndicatorControllerProvider) ? 4 : 10,
+                  width: index == currentCardIndex ? 4 : 10,
                 ),
                 shape: BoxShape.circle,
               ),

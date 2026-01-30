@@ -29,7 +29,7 @@ class HomeScreenCardsList extends ConsumerWidget {
             itemBuilder: (context, index, realIndex) => index < cards.length
                 ? InkWell(
                     // onTap: () => ref.read(cardsControllerProvider.notifier).deleteCard(cards[index].cardId),
-                    child: HomeScreenCard(cardModel: cards[index]),
+                    child: HomeScreenCard(cardModel: cards[index], index: index),
                   )
                 : AddCard(
                     onTap: () => Navigator.push(

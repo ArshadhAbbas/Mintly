@@ -10,24 +10,30 @@ part of 'banks_cards_controller.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(BanksCardsSwitchController)
-final banksCardsSwitchControllerProvider =
-    BanksCardsSwitchControllerProvider._();
+final banksCardsSwitchControllerProvider = BanksCardsSwitchControllerFamily._();
 
 final class BanksCardsSwitchControllerProvider
     extends $NotifierProvider<BanksCardsSwitchController, bool> {
-  BanksCardsSwitchControllerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'banksCardsSwitchControllerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
+  BanksCardsSwitchControllerProvider._({
+    required BanksCardsSwitchControllerFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'banksCardsSwitchControllerProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$banksCardsSwitchControllerHash();
+
+  @override
+  String toString() {
+    return r'banksCardsSwitchControllerProvider'
+        ''
+        '($argument)';
+  }
 
   @$internal
   @override
@@ -40,13 +46,52 @@ final class BanksCardsSwitchControllerProvider
       providerOverride: $SyncValueProvider<bool>(value),
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is BanksCardsSwitchControllerProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$banksCardsSwitchControllerHash() =>
-    r'4a15599c51980b5796920c98163511cbe53ec26f';
+    r'd66b25a60dd37b277b08fdfa7f12f9aa85913198';
+
+final class BanksCardsSwitchControllerFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          BanksCardsSwitchController,
+          bool,
+          bool,
+          bool,
+          int
+        > {
+  BanksCardsSwitchControllerFamily._()
+    : super(
+        retry: null,
+        name: r'banksCardsSwitchControllerProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  BanksCardsSwitchControllerProvider call(int index) =>
+      BanksCardsSwitchControllerProvider._(argument: index, from: this);
+
+  @override
+  String toString() => r'banksCardsSwitchControllerProvider';
+}
 
 abstract class _$BanksCardsSwitchController extends $Notifier<bool> {
-  bool build();
+  late final _$args = ref.$arg as int;
+  int get index => _$args;
+
+  bool build(int index);
   @$mustCallSuper
   @override
   void runBuild() {
@@ -59,7 +104,7 @@ abstract class _$BanksCardsSwitchController extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    element.handleCreate(ref, () => build(_$args));
   }
 }
 
@@ -97,7 +142,7 @@ final class BankCardsIndicatorControllerProvider
 }
 
 String _$bankCardsIndicatorControllerHash() =>
-    r'62c5c71f3fd38ab856fb3a5746c7e6c1209619d3';
+    r'd0a2170e28944b24d15b2fad7d091587d2665b36';
 
 abstract class _$BankCardsIndicatorController extends $Notifier<int> {
   int build();

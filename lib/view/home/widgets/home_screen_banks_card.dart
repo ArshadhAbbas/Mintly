@@ -9,7 +9,8 @@ import 'package:mintly/utils/extensions/string_extensions.dart';
 import 'package:mintly/view/home/widgets/card_switch.dart';
 
 class HomeScreenBankCard extends StatelessWidget {
-  const HomeScreenBankCard({super.key});
+  const HomeScreenBankCard({super.key, required this.index});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class HomeScreenBankCard extends StatelessWidget {
                   ),
                   child: Consumer(
                     builder: (context, ref, child) {
-                      final bool isShowing = ref.watch(banksCardsSwitchControllerProvider);
+                      final bool isShowing = ref.watch(banksCardsSwitchControllerProvider(index));
                       return Column(
                         mainAxisAlignment: .start,
                         crossAxisAlignment: .start,
@@ -71,7 +72,7 @@ class HomeScreenBankCard extends StatelessWidget {
                                 currentValue: isShowing,
                                 onTap: () {
                                   ref
-                                      .read(banksCardsSwitchControllerProvider.notifier)
+                                      .read(banksCardsSwitchControllerProvider(index).notifier)
                                       .updateSwitch();
                                 },
                                 thumbColor: Colors.black,
