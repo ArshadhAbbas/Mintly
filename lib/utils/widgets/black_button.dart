@@ -21,6 +21,7 @@ class BlackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(borderRadius ?? 10),
       child: Container(
         height: height ?? 60,
         margin: margin ?? EdgeInsets.all(12),

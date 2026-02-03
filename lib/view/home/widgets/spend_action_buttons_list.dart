@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
+import 'package:mintly/view/add_transaction/add_transaction_view.dart';
 import 'package:mintly/view/home/widgets/spend_action_button.dart';
 
 class SpendActionButtonsList extends StatelessWidget {
@@ -23,7 +25,7 @@ class SpendActionButtonsList extends StatelessWidget {
               icon: Icon(Icons.arrow_upward_rounded, color: Colors.white, size: context.isMobile ? null : context.screenWidth / 50),
               buttonText: "Send",
               onTap: () {
-                print("Send");
+                context.pushNamed(AddTransactionView.pathName);
               },
             ),
 
