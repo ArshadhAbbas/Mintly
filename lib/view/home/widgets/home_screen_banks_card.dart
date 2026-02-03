@@ -35,20 +35,21 @@ class HomeScreenBankCard extends StatelessWidget {
                 SizedBox(height: constraints.maxHeight / 16),
 
                 Row(
+                  crossAxisAlignment: .center,
+                  mainAxisAlignment: .center,
                   children: [
                     HugeIcon(icon: HugeIcons.strokeRoundedBank),
+                    SizedBox(width: 10),
+                    Text(bankAccountsModel.bankName.toUpperCase(), style: TextStyleConstants.w600F14),
                     Spacer(),
-                    Text("Banks", style: TextStyleConstants.w600F12),
+                    Text("Bank", style: TextStyleConstants.w600F12),
                   ],
                 ),
                 SizedBox(height: constraints.maxHeight / 16),
                 Container(
                   padding: EdgeInsets.all(6),
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                  decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(10)),
                   child: Consumer(
                     builder: (context, ref, child) {
                       final bool isShowing = ref.watch(banksCardsSwitchControllerProvider(index));
@@ -56,28 +57,19 @@ class HomeScreenBankCard extends StatelessWidget {
                         mainAxisAlignment: .start,
                         crossAxisAlignment: .start,
                         children: [
-                          Text(
-                            "Account Number",
-                            style: TextStyleConstants.w400F10.copyWith(
-                              color: Colors.black.withValues(alpha: 0.5),
-                            ),
-                          ),
-                          SizedBox(height: 8),
+                          Text("Account Number", style: TextStyleConstants.w400F10.copyWith(color: Colors.black.withValues(alpha: 0.5))),
+                          SizedBox(height: 4),
                           Row(
                             children: [
                               Text(
-                                isShowing
-                                    ? bankAccountsModel.accountNumber
-                                    : bankAccountsModel.accountNumber.starred,
+                                isShowing ? bankAccountsModel.accountNumber : bankAccountsModel.accountNumber.starred,
                                 style: TextStyleConstants.w700F16,
                               ),
                               Spacer(),
                               CardSwitch(
                                 currentValue: isShowing,
                                 onTap: () {
-                                  ref
-                                      .read(banksCardsSwitchControllerProvider(index).notifier)
-                                      .updateSwitch();
+                                  ref.read(banksCardsSwitchControllerProvider(index).notifier).updateSwitch();
                                 },
                                 thumbColor: Colors.black,
                                 borderColor: Colors.black,
@@ -89,17 +81,11 @@ class HomeScreenBankCard extends StatelessWidget {
                           RichText(
                             text: TextSpan(
                               text: "IFSC: ",
-                              style: TextStyleConstants.w400F12.copyWith(
-                                color: Colors.black.withValues(alpha: 0.5),
-                              ),
+                              style: TextStyleConstants.w400F12.copyWith(color: Colors.black.withValues(alpha: 0.5)),
                               children: [
                                 TextSpan(
-                                  text: isShowing
-                                      ? bankAccountsModel.ifscCode
-                                      : bankAccountsModel.ifscCode.starred,
-                                  style: TextStyleConstants.w700F12.copyWith(
-                                    color: Colors.black.withValues(alpha: 0.6),
-                                  ),
+                                  text: isShowing ? bankAccountsModel.ifscCode : bankAccountsModel.ifscCode.starred,
+                                  style: TextStyleConstants.w700F12.copyWith(color: Colors.black.withValues(alpha: 0.6)),
                                 ),
                               ],
                             ),
@@ -114,10 +100,7 @@ class HomeScreenBankCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Available Balance",
-                      style: TextStyleConstants.w400F12.copyWith(color: Colors.black),
-                    ),
+                    Text("Available Balance", style: TextStyleConstants.w400F12.copyWith(color: Colors.black)),
                     Text("${StringConstants.rupeeIcon} ${bankAccountsModel.accountBalance}", style: TextStyleConstants.w600F16),
                   ],
                 ),

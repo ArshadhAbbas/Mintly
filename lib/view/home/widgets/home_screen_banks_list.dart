@@ -28,20 +28,13 @@ class HomeScreenBanksList extends ConsumerWidget {
           child: CarouselSlider.builder(
             itemCount: bankAccounts.length + 1,
             itemBuilder: (context, index, realIndex) => index < bankAccounts.length
-                ? InkWell(
-                    onTap: () => ref
-                        .read(bankAccountsControllerProvider.notifier)
-                        .deleteBank(bankAccounts[index].id),
-                    child: HomeScreenBankCard(index: index, bankAccountsModel: bankAccounts[index]),
-                  )
+                ? HomeScreenBankCard(index: index, bankAccountsModel: bankAccounts[index])
                 : AddNewAccountCard(onTap: () => context.pushNamed(AddNewBankAccount.pathName)),
             options: CarouselOptions(
               viewportFraction: 1,
               autoPlay: false,
               enableInfiniteScroll: false,
-              onPageChanged: (index, reason) => ref
-                  .read(bankCardsIndicatorControllerProvider.notifier)
-                  .updateCardIndicator(index),
+              onPageChanged: (index, reason) => ref.read(bankCardsIndicatorControllerProvider.notifier).updateCardIndicator(index),
             ),
           ),
         ),

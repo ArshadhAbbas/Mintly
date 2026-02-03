@@ -10,20 +10,38 @@ import 'package:mintly/utils/extensions/buildcontext_extensions.dart';
 import 'package:mintly/utils/widgets/black_button.dart';
 import 'package:mintly/view/card_scanner/widgets/add_card_text_field.dart';
 
-class AddNewBankAccount extends StatefulWidget {
+class AddNewBankAccount extends ConsumerStatefulWidget {
   static const String path = "/add_new_bank_account";
   static const String pathName = "add_new_bank_account";
-  const AddNewBankAccount({super.key});
+  static const String updateBankIdQuery = "update_bank_id";
+  const AddNewBankAccount({super.key, this.bankId});
+  final int? bankId;
 
   @override
-  State<AddNewBankAccount> createState() => _AddNewBankAccountState();
+  ConsumerState<AddNewBankAccount> createState() => _AddNewBankAccountState();
 }
 
-class _AddNewBankAccountState extends State<AddNewBankAccount> {
+class _AddNewBankAccountState extends ConsumerState<AddNewBankAccount> {
   TextEditingController accountNumberController = TextEditingController();
   TextEditingController bankNameController = TextEditingController();
   TextEditingController ifsController = TextEditingController();
   TextEditingController balanceController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final bankAccounts = ref.read(bankAccountsControllerProvider);
+
+      final bank = bankAccounts.firstWhere((e) => e.id == widget.bankId);
+
+      accountNumberController.text = bank.accountNumber;
+      bankNameController.text = bank.bankName;
+      ifsController.text = bank.ifscCode;
+      balanceController.text = bank.accountBalance.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +57,7 @@ class _AddNewBankAccountState extends State<AddNewBankAccount> {
               SizedBox(height: 20),
               Text(
                 "Enter your Bank Account Details",
-                style: TextStyleConstants.w400F14.copyWith(
-                  color: Colors.black.withValues(alpha: 0.3),
-                ),
+                style: TextStyleConstants.w400F14.copyWith(color: Colors.black.withValues(alpha: 0.3)),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10),
@@ -97,39 +113,33 @@ class _AddNewBankAccountState extends State<AddNewBankAccount> {
           ),
         ),
       ),
-      bottomNavigationBar: Consumer(
-        builder: (context, ref, child) {
-          return BlackButton(
-            onTap: () {
-              if ([
-                bankNameController,
-                accountNumberController,
-                ifsController,
-              ].any((element) => element.text.trim().isEmpty)) {
-                context.showSnackBar("Please fill all the mandatory fields");
-                return;
-              } else {
-                var bankAccounts = ref.watch(bankAccountsControllerProvider);
-                ref
-                    .read(bankAccountsControllerProvider.notifier)
-                    .addNewBank(
-                      BankAccountsModel(
-                        id: bankAccounts.isEmpty ? 0 : bankAccounts.last.id + 1,
-                        bankName: bankNameController.text.trim(),
-                        accountNumber: accountNumberController.text.trim().replaceAll(" ", ""),
-                        ifscCode: ifsController.text.trim().replaceAll(" ", ""),
-                        accountBalance: balanceController.text.isEmpty
-                            ? 0
-                            : num.parse(balanceController.text.trim()),
-                      ),
-                    );
-              }
-              context.pop();
-            },
-            text: "Save Account",
-            margin: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-          );
+      bottomNavigationBar: BlackButton(
+        onTap: () {
+          if ([bankNameController, accountNumberController, ifsController].any((element) => element.text.trim().isEmpty)) {
+            context.showSnackBar("Please fill all the mandatory fields");
+            return;
+          } else {
+            var bankAccounts = ref.watch(bankAccountsControllerProvider);
+            ref
+                .read(bankAccountsControllerProvider.notifier)
+                .addNewBank(
+                  BankAccountsModel(
+                    id: widget.bankId != null
+                        ? widget.bankId!
+                        : bankAccounts.isEmpty
+                        ? 0
+                        : bankAccounts.last.id + 1,
+                    bankName: bankNameController.text.trim(),
+                    accountNumber: accountNumberController.text.trim().replaceAll(" ", ""),
+                    ifscCode: ifsController.text.trim().replaceAll(" ", ""),
+                    accountBalance: balanceController.text.isEmpty ? 0 : num.parse(balanceController.text.trim()),
+                  ),
+                );
+          }
+          context.pop();
         },
+        text: "Save Account",
+        margin: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       ),
     );
   }

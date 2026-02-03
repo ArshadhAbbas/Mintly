@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
+import 'package:mintly/view/accounts/accounts_view.dart';
 import 'package:mintly/view/categories/categories_view.dart';
 
 class PreferencesView extends StatelessWidget {
@@ -13,7 +14,7 @@ class PreferencesView extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
+        child: Column(  
           mainAxisAlignment: .start,
           crossAxisAlignment: .start,
           children: [
@@ -23,6 +24,13 @@ class PreferencesView extends StatelessWidget {
               icon: HugeIcon(icon: HugeIcons.strokeRoundedTransactionHistory),
               text: "Transactions",
               onTap: () {},
+            ),
+            PreferenceSelectItem(
+              icon: HugeIcon(icon: HugeIcons.strokeRoundedMoneyExchange03),
+              text: "Accounts",
+              onTap: () {
+                context.pushNamed(AccountsView.pathName);
+              },
             ),
             PreferenceSelectItem(
               icon: HugeIcon(icon: HugeIcons.strokeRoundedArrange),

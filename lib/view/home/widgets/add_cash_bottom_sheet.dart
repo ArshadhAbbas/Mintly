@@ -43,6 +43,7 @@ class _AddCashBottomSheetState extends State<AddCashBottomSheet> {
             AddCardTextField(
               textEdingController: cashController,
               hintText: "10000",
+              textInputType: TextInputType.number,
               prefix: Text(StringConstants.rupeeIcon),
             ),
             const SizedBox(height: 16),

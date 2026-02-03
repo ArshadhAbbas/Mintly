@@ -65,13 +65,14 @@ class CardModelAdapter extends TypeAdapter<CardModel> {
       balance: fields[3] as num,
       expiry: fields[4] as String,
       cardNumber: fields[2] as String,
+      cardHolderName: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CardModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.cardId)
       ..writeByte(1)
@@ -81,7 +82,9 @@ class CardModelAdapter extends TypeAdapter<CardModel> {
       ..writeByte(3)
       ..write(obj.balance)
       ..writeByte(4)
-      ..write(obj.expiry);
+      ..write(obj.expiry)
+      ..writeByte(5)
+      ..write(obj.cardHolderName);
   }
 
   @override

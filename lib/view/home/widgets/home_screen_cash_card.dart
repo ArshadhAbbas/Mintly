@@ -9,6 +9,7 @@ import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/datetime_extensions.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
+import 'package:mintly/utils/extensions/string_extensions.dart';
 import 'package:mintly/view/home/widgets/add_cash_bottom_sheet.dart';
 
 class HomeScreenCashCard extends StatelessWidget {
@@ -56,88 +57,66 @@ class HomeScreenCashCard extends StatelessWidget {
                               ],
                             ),
                           )
-                        : InkWell(
-                            onTap: () => showModalBottomSheet(
-                              backgroundColor: Colors.transparent,
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (context) => AddCashBottomSheet(
-                                isUpdating: true,
-                                currentAmount: cashBox.values.first.balanceAmount,
+                        : Column(
+                            mainAxisAlignment: .start,
+                            crossAxisAlignment: .start,
+                            children: [
+                              SizedBox(height: constraints.maxHeight / 16),
+                              Row(
+                                children: [
+                                  HugeIcon(icon: HugeIcons.strokeRoundedMoney03),
+                                  Spacer(),
+                                  Text("Cash", style: TextStyleConstants.w600F12),
+                                ],
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: .start,
-                              crossAxisAlignment: .start,
-                              children: [
-                                SizedBox(height: constraints.maxHeight / 16),
-                                Row(
+                              SizedBox(height: constraints.maxHeight / 8),
+                              Container(
+                                padding: EdgeInsets.all(6),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: .spaceBetween,
                                   children: [
-                                    HugeIcon(icon: HugeIcons.strokeRoundedMoney03),
-                                    Spacer(),
-                                    Text("Cash", style: TextStyleConstants.w600F12),
+                                    Column(
+                                      mainAxisAlignment: .start,
+                                      crossAxisAlignment: .start,
+                                      children: [
+                                        Text(
+                                          "Physical Cash",
+                                          style: TextStyleConstants.w400F10.copyWith(color: Colors.black.withValues(alpha: 0.5)),
+                                        ),
+                                        SizedBox(height: 8),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Last Updated: ${cashBox.values.first.updatedTime.longAgo.toTitleCase}",
+                                              style: TextStyleConstants.w600F14,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: AppColors.appThemeGreen),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      padding: EdgeInsets.all(5),
+                                      child: HugeIcon(icon: HugeIcons.strokeRoundedCash01, color: AppColors.appThemeGreen),
+                                    ),
                                   ],
                                 ),
-                                SizedBox(height: constraints.maxHeight / 8),
-                                Container(
-                                  padding: EdgeInsets.all(6),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.withValues(alpha: 0.1),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: .spaceBetween,
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment: .start,
-                                        crossAxisAlignment: .start,
-                                        children: [
-                                          Text(
-                                            "Physical Cash",
-                                            style: TextStyleConstants.w400F10.copyWith(
-                                              color: Colors.black.withValues(alpha: 0.5),
-                                            ),
-                                          ),
-                                          SizedBox(height: 8),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "Last Updated: ${cashBox.values.first.updatedTime.longAgo}",
-                                                style: TextStyleConstants.w600F14,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.appThemeGreen),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        padding: EdgeInsets.all(5),
-                                        child: HugeIcon(
-                                          icon: HugeIcons.strokeRoundedCash01,
-                                          color: AppColors.appThemeGreen,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Spacer(),
+                              ),
+                              Spacer(),
 
-                                Text(
-                                  "Cash in Hand",
-                                  style: TextStyleConstants.w400F12.copyWith(color: Colors.black),
-                                ),
-                                Text(
-                                  "${StringConstants.rupeeIcon} ${cashBox.values.first.balanceAmount}",
-                                  style: TextStyleConstants.w600F16,
-                                ),
+                              Text("Cash in Hand", style: TextStyleConstants.w400F12.copyWith(color: Colors.black)),
+                              Text("${StringConstants.rupeeIcon} ${cashBox.values.first.balanceAmount}", style: TextStyleConstants.w600F16),
 
-                                SizedBox(height: constraints.maxHeight / 15),
-                              ],
-                            ),
+                              SizedBox(height: constraints.maxHeight / 15),
+                            ],
                           );
                   },
                 ),

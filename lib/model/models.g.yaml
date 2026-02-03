@@ -17,7 +17,7 @@ types:
         index: 3
   CardModel:
     typeId: 1
-    nextIndex: 5
+    nextIndex: 6
     fields:
       cardId:
         index: 0
@@ -29,6 +29,8 @@ types:
         index: 3
       expiry:
         index: 4
+      cardHolderName:
+        index: 5
   BankAccountsModel:
     typeId: 2
     nextIndex: 5
