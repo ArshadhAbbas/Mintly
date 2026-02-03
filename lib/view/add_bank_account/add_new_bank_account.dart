@@ -31,14 +31,14 @@ class _AddNewBankAccountState extends ConsumerState<AddNewBankAccount> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final bankAccounts = ref.read(bankAccountsControllerProvider);
-
-      final bank = bankAccounts.firstWhere((e) => e.id == widget.bankId);
-
-      accountNumberController.text = bank.accountNumber;
-      bankNameController.text = bank.bankName;
-      ifsController.text = bank.ifscCode;
-      balanceController.text = bank.accountBalance.toString();
+      if (widget.bankId != null) {
+        final bankAccounts = ref.read(bankAccountsControllerProvider);
+        final bank = bankAccounts.firstWhere((e) => e.id == widget.bankId);
+        accountNumberController.text = bank.accountNumber;
+        bankNameController.text = bank.bankName;
+        ifsController.text = bank.ifscCode;
+        balanceController.text = bank.accountBalance.toString();
+      }
     });
   }
 

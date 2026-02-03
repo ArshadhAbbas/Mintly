@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mintly/controller/accounts_controller.dart';
+import 'package:mintly/controller/cash_controller.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/string_extensions.dart';
 import 'package:mintly/utils/widgets/black_button.dart';
@@ -62,7 +64,9 @@ class AccountTypeSelectionSheet extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   isScrollControlled: true,
-                  builder: (context) => AddCashBottomSheet(),
+                  builder: (context) => Consumer(builder: (context, ref, child) {
+                    final cash = ref.watch(cashControllerProvider);
+                     return AddCashBottomSheet(isUpdating: cash.isNotEmpty,currentAmount: cash.first.balanceAmount); },),
                 );
               }
             },

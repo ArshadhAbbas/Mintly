@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_ce/hive.dart';
+import 'package:mintly/controller/cash_controller.dart';
 import 'package:mintly/model/cash_model.dart';
-import 'package:mintly/utils/app_constants.dart/hive_boxes.dart';
 import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/extensions/buildcontext_extensions.dart';
 import 'package:mintly/utils/widgets/black_button.dart';
@@ -47,26 +47,22 @@ class _AddCashBottomSheetState extends State<AddCashBottomSheet> {
               prefix: Text(StringConstants.rupeeIcon),
             ),
             const SizedBox(height: 16),
-            BlackButton(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              onTap: () {
-                if (cashController.text.isEmpty) {
-                  context.showSnackBar("Cannot be empty");
-                } else {
-                  CashModel cashModel = CashModel(
-                    balanceAmount: cashController.text.trim(),
-                    updatedTime: DateTime.now(),
-                  );
-                  var box = Hive.box<CashModel>(HiveBoxes.cashBox);
-                  if (box.isEmpty) {
-                    box.add(cashModel);
-                  } else {
-                    box.putAt(0, cashModel);
-                  }
-                  context.pop();
-                }
+            Consumer(
+              builder: (context, ref, child) {
+                return BlackButton(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  onTap: () {
+                    if (cashController.text.isEmpty) {
+                      context.showSnackBar("Cannot be empty");
+                    } else {
+                      CashModel cashModel = CashModel(balanceAmount: cashController.text.trim(), updatedTime: DateTime.now());
+                      ref.read(cashControllerProvider.notifier).addCash(cashModel);
+                      context.pop();
+                    }
+                  },
+                  text: "Add Cash",
+                );
               },
-              text: "Add Cash",
             ),
           ],
         ),
