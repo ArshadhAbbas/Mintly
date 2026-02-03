@@ -44,15 +44,21 @@ class CustomBottomNav extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14.8),
             child: Row(
-              mainAxisAlignment: .spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
                 3,
-                (index) => GestureDetector(
+                (index) => InkWell(
                   onTap: () => ref.read(bottomNavControllerProvider.notifier).updateBottomNavIndex(index: index),
-                  child: HugeIcon(
-                    icon: ref.watch(bottomNavIconsProvider)[index],
-                    size: 20,
-                    color: ref.watch(bottomNavControllerProvider) == index ? Colors.white : Colors.black.withValues(alpha: 0.2),
+                  child: SizedBox(
+                    width: context.screenWidth * 0.2,
+                    child: Align(
+                      alignment: index==0?Alignment.centerLeft:index==1?Alignment.center:Alignment.centerRight,
+                      child: HugeIcon(
+                        icon: ref.watch(bottomNavIconsProvider)[index],
+                        size: 20,
+                        color: ref.watch(bottomNavControllerProvider) == index ? Colors.white : Colors.black.withValues(alpha: 0.2),
+                      ),
+                    ),
                   ),
                 ),
               ),

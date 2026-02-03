@@ -65,13 +65,14 @@ class CardModelAdapter extends TypeAdapter<CardModel> {
       balance: fields[3] as num,
       expiry: fields[4] as String,
       cardNumber: fields[2] as String,
+      cardHolderName: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CardModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.cardId)
       ..writeByte(1)
@@ -81,7 +82,9 @@ class CardModelAdapter extends TypeAdapter<CardModel> {
       ..writeByte(3)
       ..write(obj.balance)
       ..writeByte(4)
-      ..write(obj.expiry);
+      ..write(obj.expiry)
+      ..writeByte(5)
+      ..write(obj.cardHolderName);
   }
 
   @override
@@ -91,6 +94,89 @@ class CardModelAdapter extends TypeAdapter<CardModel> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is CardModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class BankAccountsModelAdapter extends TypeAdapter<BankAccountsModel> {
+  @override
+  final typeId = 2;
+
+  @override
+  BankAccountsModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return BankAccountsModel(
+      id: (fields[0] as num).toInt(),
+      accountNumber: fields[1] as String,
+      ifscCode: fields[2] as String,
+      accountBalance: fields[3] as num,
+      bankName: fields[4] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, BankAccountsModel obj) {
+    writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.accountNumber)
+      ..writeByte(2)
+      ..write(obj.ifscCode)
+      ..writeByte(3)
+      ..write(obj.accountBalance)
+      ..writeByte(4)
+      ..write(obj.bankName);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BankAccountsModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CashModelAdapter extends TypeAdapter<CashModel> {
+  @override
+  final typeId = 3;
+
+  @override
+  CashModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CashModel(
+      balanceAmount: fields[0] as String,
+      updatedTime: fields[1] as DateTime,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CashModel obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.balanceAmount)
+      ..writeByte(1)
+      ..write(obj.updatedTime);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CashModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

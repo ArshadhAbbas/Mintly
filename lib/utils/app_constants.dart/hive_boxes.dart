@@ -1,5 +1,7 @@
 class HiveBoxes {
   static const String categoriesBox = "categories";
   static const String transactionsBox = "transactions";
-  static const String cardsBox = "transactions";
+  static const String cardsBox = "cards";
+  static const String banksBox = "banks";
+  static const String cashBox = "cash";
 }

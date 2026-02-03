@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mintly/main.dart';
+import 'package:mintly/view/accounts/accounts_view.dart';
+import 'package:mintly/view/add_bank_account/add_new_bank_account.dart';
 import 'package:mintly/view/authenticator/authenticator_view.dart';
 import 'package:mintly/view/bottom_nav/view/bottom_nav_view.dart';
+import 'package:mintly/view/card_scanner/add_card_view.dart';
 import 'package:mintly/view/categories/categories_view.dart';
 import 'package:mintly/view/categories/sub_categories/sub_categories_view.dart';
 import 'package:mintly/view/onboarding/view/onboarding_view.dart';
@@ -28,6 +31,25 @@ class GoRouterConfig {
           return SubCategoriesView(categoryId: categoryId);
         },
       ),
+      GoRouterRoute(
+        pathRoute: AddCardView.path,
+        pathRouteName: AddCardView.pathName,
+        builder: (context, state) {
+          final cardIdQuery = state.uri.queryParameters[AddCardView.cardIdQuery];
+          final int? cardId = cardIdQuery != null ? int.parse(cardIdQuery) : null;
+          return AddCardView(cardId: cardId);
+        },
+      ),
+      GoRouterRoute(
+        pathRoute: AddNewBankAccount.path,
+        pathRouteName: AddNewBankAccount.pathName,
+        builder: (context, state) {
+          final bankIdQuery = state.uri.queryParameters[AddNewBankAccount.updateBankIdQuery];
+          final int? bankId = bankIdQuery != null ? int.parse(bankIdQuery) : null;
+          return AddNewBankAccount(bankId: bankId);
+        },
+      ),
+      GoRouterRoute(pathRoute: AccountsView.path, pathRouteName: AccountsView.pathName, builder: (context, state) => AccountsView()),
     ],
     errorBuilder: (context, state) => Scaffold(body: Center(child: Text(state.error.toString()))),
   );

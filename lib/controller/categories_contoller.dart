@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:hive_ce/hive_ce.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:mintly/model/categories_model/categories_model.dart';
+import 'package:mintly/model/categories_model.dart';
 import 'package:mintly/utils/app_constants.dart/hive_boxes.dart';
 import 'package:mintly/utils/config/huge_icon_config.dart';
 import 'package:mintly/utils/extensions/string_extensions.dart';

@@ -25,3 +25,25 @@ class CardsController extends _$CardsController {
     state = _box.values.toList();
   }
 }
+
+
+@riverpod
+class CardSwitchController extends _$CardSwitchController {
+  @override
+  bool build(int index) => false;
+
+  void updateCardSwitch() {
+    state = !state;
+  }
+}
+
+
+@riverpod
+class CardIndicatorController extends _$CardIndicatorController {
+  @override
+  int build() => 0;
+
+  void updateCardIndicator(int newIndex) {
+    state = newIndex;
+  }
+}

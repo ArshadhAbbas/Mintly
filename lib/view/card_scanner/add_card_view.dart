@@ -19,19 +19,39 @@ import 'package:mintly/utils/widgets/yellow_button.dart';
 import 'package:mintly/view/card_scanner/widgets/add_card_dropdown.dart';
 import 'package:mintly/view/card_scanner/widgets/add_card_text_field.dart';
 
-class AddCardView extends StatefulWidget {
-  const AddCardView({super.key});
+class AddCardView extends ConsumerStatefulWidget {
+  static const String path = "/add_card";
+  static const String pathName = "add_card";
+  static const String cardIdQuery = "card_id";
+  const AddCardView({super.key, this.cardId});
+  final int? cardId;
 
   @override
-  State<AddCardView> createState() => _AddCardViewState();
+  ConsumerState<AddCardView> createState() => _AddCardViewState();
 }
 
-class _AddCardViewState extends State<AddCardView> {
+class _AddCardViewState extends ConsumerState<AddCardView> {
   TextEditingController cardNumberController = TextEditingController();
   TextEditingController cardHolderNameController = TextEditingController();
   TextEditingController expirationDateController = TextEditingController();
   TextEditingController balanceController = TextEditingController();
   TextEditingController cardTypeController = TextEditingController();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (widget.cardId != null) {
+        CardModel card = ref.watch(cardsControllerProvider).firstWhere((element) => element.cardId == widget.cardId);
+        cardNumberController.text = card.cardNumber;
+        cardHolderNameController.text = card.cardHolderName ?? "";
+        expirationDateController.text = card.expiry;
+        balanceController.text = card.balance.toString();
+        cardTypeController.text = card.cardType ?? "";
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,41 +188,42 @@ class _AddCardViewState extends State<AddCardView> {
           ),
         ),
       ),
-      bottomNavigationBar: Consumer(
-        builder: (context, ref, child) {
-          return BlackButton(
-            onTap: () {
-              final fields = [balanceController.text, expirationDateController.text, cardNumberController.text];
+      bottomNavigationBar: BlackButton(
+        onTap: () {
+          final fields = [balanceController.text, expirationDateController.text, cardNumberController.text, cardHolderNameController.text];
 
-              if (fields.any((e) => e.trim().isEmpty)) {
-                context.showSnackBar("Please fill all the mandatory fields");
-                return;
-              }
+          if (fields.any((e) => e.trim().isEmpty)) {
+            context.showSnackBar("Please fill all the mandatory fields");
+            return;
+          }
 
-              try {
-                final cards = ref.read(cardsControllerProvider);
+          try {
+            final cards = ref.read(cardsControllerProvider);
 
-                ref
-                    .read(cardsControllerProvider.notifier)
-                    .addNewCard(
-                      CardModel(
-                        cardId: cards.isEmpty ? 0 : cards.last.cardId + 1,
-                        cardType: cardTypeController.text.isEmpty ? null : cardTypeController.text.trim(),
-                        balance: num.parse(balanceController.text.trim()),
-                        expiry: expirationDateController.text.trim(),
-                        cardNumber: cardNumberController.text.replaceAll(" ", "").trim(),
-                      ),
-                    );
+            ref
+                .read(cardsControllerProvider.notifier)
+                .addNewCard(
+                  CardModel(
+                    cardId: widget.cardId != null
+                        ? widget.cardId!
+                        : cards.isEmpty
+                        ? 0
+                        : cards.last.cardId + 1,
+                    cardType: cardTypeController.text.isEmpty ? null : cardTypeController.text.trim(),
+                    balance: num.parse(balanceController.text.trim()),
+                    expiry: expirationDateController.text.trim(),
+                    cardNumber: cardNumberController.text.replaceAll(" ", "").trim(),
+                    cardHolderName: cardHolderNameController.text,
+                  ),
+                );
 
-                context.pop();
-              } catch (e, s) {
-                log(e.toString(), stackTrace: s);
-              }
-            },
-            text: "Save Card",
-            margin: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-          );
+            context.pop();
+          } catch (e, s) {
+            log(e.toString(), stackTrace: s);
+          }
         },
+        text: "Save Card",
+        margin: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       ),
     );
   }
