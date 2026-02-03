@@ -25,7 +25,7 @@ class AccountsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bankAccounts = ref.watch(bankAccountsControllerProvider);
     final cards = ref.watch(cardsControllerProvider);
-    var cash = ref.watch(cashControllerProvider);
+    final cash = ref.watch(cashControllerProvider);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -142,30 +142,29 @@ class AccountsView extends ConsumerWidget {
                         itemCount: cards.length,
                       ),
                     ],
-                    cash.isNotEmpty
-                        ? Column(
-                            mainAxisAlignment: .start,
-                            crossAxisAlignment: .start,
-                            children: [
-                              Text("Cash", style: TextStyleConstants.w500F14),
-                              AccountsCard(
-                                leading: Text(StringConstants.rupeeIcon, style: TextStyleConstants.w500F20),
-                                title: cash.first.balanceAmount,
-                                onUpdate: () {
-                                  showModalBottomSheet(
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (context) => AddCashBottomSheet(isUpdating: true, currentAmount: cash.first.balanceAmount),
-                                  );
-                                },
-                                onDelete: () {
-                                  ref.read(cashControllerProvider.notifier).deleteCashAccount();
-                                },
-                              ),
-                            ],
-                          )
-                        : SizedBox.shrink(),
+                    if (cash.isNotEmpty)
+                      Column(
+                        mainAxisAlignment: .start,
+                        crossAxisAlignment: .start,
+                        children: [
+                          Text("Cash", style: TextStyleConstants.w500F14),
+                          AccountsCard(
+                            leading: Text(StringConstants.rupeeIcon, style: TextStyleConstants.w500F20),
+                            title: cash.first.balanceAmount,
+                            onUpdate: () {
+                              showModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => AddCashBottomSheet(isUpdating: true, currentAmount: cash.first.balanceAmount),
+                              );
+                            },
+                            onDelete: () async {
+                              await ref.read(cashControllerProvider.notifier).deleteCashAccount();
+                            },
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),

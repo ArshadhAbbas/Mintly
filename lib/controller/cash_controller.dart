@@ -24,8 +24,8 @@ class CashController extends _$CashController {
     state = _box.values.toList();
   }
 
-  void deleteCashAccount() {
-    _box.clear();
+  Future<void> deleteCashAccount()async {
+    await _box.clear();
     state = _box.values.toList();
   }
 }

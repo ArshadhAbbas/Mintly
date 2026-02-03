@@ -41,7 +41,7 @@ final class CashControllerProvider
   }
 }
 
-String _$cashControllerHash() => r'a2ef326e2e525f7ecf35bcb2cec9df6ae25fffe1';
+String _$cashControllerHash() => r'0d47e8e1c1a66d225dc9b472864c0d4d935b5b84';
 
 abstract class _$CashController extends $Notifier<List<CashModel>> {
   List<CashModel> build();

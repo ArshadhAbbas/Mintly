@@ -29,40 +29,62 @@ class _AddCashBottomSheetState extends State<AddCashBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(bottom: bottomInset),
-      child: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.all(10.0),
+    // final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Align(
+        alignment: AlignmentGeometry.bottomCenter,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: .min,
           children: [
-            const Text('Wallet', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            AddCardTextField(
-              textEdingController: cashController,
-              hintText: "10000",
-              textInputType: TextInputType.number,
-              prefix: Text(StringConstants.rupeeIcon),
+            IconButton(
+              icon: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white),
+                ),
+                child: Icon(Icons.close,color: Colors.white,size: 20,),
+              ),
+              onPressed: () => context.pop(),
             ),
-            const SizedBox(height: 16),
-            Consumer(
-              builder: (context, ref, child) {
-                return BlackButton(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  onTap: () {
-                    if (cashController.text.isEmpty) {
-                      context.showSnackBar("Cannot be empty");
-                    } else {
-                      CashModel cashModel = CashModel(balanceAmount: cashController.text.trim(), updatedTime: DateTime.now());
-                      ref.read(cashControllerProvider.notifier).addCash(cashModel);
-                      context.pop();
-                    }
-                  },
-                  text: "Add Cash",
-                );
-              },
+            SingleChildScrollView(
+              // padding: EdgeInsets.only(bottom: bottomInset),
+              child: Container(
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('Wallet', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 16),
+                    AddCardTextField(
+                      textEdingController: cashController,
+                      hintText: "10000",
+                      textInputType: TextInputType.number,
+                      prefix: Text(StringConstants.rupeeIcon),
+                    ),
+                    const SizedBox(height: 16),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        return BlackButton(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          onTap: () {
+                            if (cashController.text.isEmpty) {
+                              context.showSnackBar("Cannot be empty");
+                            } else {
+                              CashModel cashModel = CashModel(balanceAmount: cashController.text.trim(), updatedTime: DateTime.now());
+                              ref.read(cashControllerProvider.notifier).addCash(cashModel);
+                              context.pop();
+                            }
+                          },
+                          text: "Add Cash",
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
