@@ -68,6 +68,10 @@ class _NumericKeypadState extends State<NumericKeypad> {
   }
 
   void _input(String text) {
+    if (_controller.text.isEmpty && text == ".") _controller.text = "0";
+
+    if (_controller.text.contains(".") && text == ".") return;
+
     final value = _controller.text + text;
     _controller.text = value;
     _controller.text = _controller.text.replaceAll(StringConstants.rupeeIcon, "");

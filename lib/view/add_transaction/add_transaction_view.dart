@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mintly/utils/app_constants.dart/app_colors.dart';
-import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
-import 'package:mintly/utils/extensions/media_query_extensions.dart';
 import 'package:mintly/utils/widgets/black_button.dart';
 import 'package:mintly/utils/widgets/numeric_keypad.dart';
+import 'package:mintly/view/add_transaction/widgets/select_account_chips.dart';
+import 'package:mintly/view/add_transaction/widgets/select_categories_chips.dart';
+import 'package:mintly/view/add_transaction/widgets/transaction_textfield_card.dart';
 
 class AddTransactionView extends StatefulWidget {
   static const String path = "/add_transaction_view";
@@ -46,38 +46,12 @@ class _AddTransactionViewState extends State<AddTransactionView> {
         children: [
           Center(child: Text("Send Money", style: TextStyleConstants.w600F24)),
           const SizedBox(height: 20),
-          Expanded(
-            child: Flex(
-              direction: context.isMobile ? Axis.vertical : Axis.horizontal,
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(color: AppColors.appThemeYellow, borderRadius: BorderRadius.circular(20)),
-                  height: context.isMobile ? context.screenHeight / 3.5 : context.screenWidth * 0.25,
-                  width: context.isMobile ? double.infinity : context.screenWidth / 2,
-                  child: TextField(
-                    onTap: null,
-                    showCursor: false,
-                    enableInteractiveSelection: false,
-                    readOnly: true,
-                    textAlign: TextAlign.center,
-                    focusNode: amountFocusNode,
-                    controller: controller,
-                    keyboardType: TextInputType.none,
-                    style: TextStyleConstants.w600F24,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      filled: false,
-                      hint: Center(
-                        child: Text(StringConstants.rupeeIcon, style: TextStyleConstants.w600F24.copyWith(color: Colors.black)),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(child: NumericKeypad(controller: controller)),
-              ],
-            ),
-          ),
+          TransactionTextFieldCard(amountFocusNode: amountFocusNode, controller: controller),
+          SizedBox(height: 16),
+          SelectAccountChips(),
+          SizedBox(height: 16),
+          SelectCategoriesChips(),
+          Expanded(child: NumericKeypad(controller: controller)),
         ],
       ),
       bottomNavigationBar: Padding(
