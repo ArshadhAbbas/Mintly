@@ -89,11 +89,10 @@ class _AddTransactionViewState extends State<AddTransactionView> {
               child: SizedBox(
                 height: 45,
                 child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(overlayColor: Colors.black),
                   onPressed: () {
                     context.pop();
                   },
-                  child: Text("Cancel", style: TextStyleConstants.w500F16.copyWith(color: Colors.black)),
+                  child: Text("Cancel", style: TextStyleConstants.w500F16),
                 ),
               ),
             ),

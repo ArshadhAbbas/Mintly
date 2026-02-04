@@ -23,13 +23,27 @@ class AppTheme {
         bodySmall: TextStyleConstants.w400F12,
         labelLarge: TextStyleConstants.w600F14,
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateColor.resolveWith((states) {
+            if (states.contains(WidgetState.pressed)) {
+              return Colors.white;
+            }
+            if (states.contains(WidgetState.hovered)) {
+              return Colors.white;
+            }
+            return Colors.black;
+          }),
+          overlayColor: WidgetStatePropertyAll(Colors.black),
+        ),
+      ),
       textButtonTheme: TextButtonThemeData(style: ButtonStyle(foregroundColor: WidgetStatePropertyAll(Colors.black))),
       cardTheme: CardThemeData(
         color: AppColors.lightCard,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       ),
-
+      dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(10))),
       popupMenuTheme: PopupMenuThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         color: AppColors.white,
