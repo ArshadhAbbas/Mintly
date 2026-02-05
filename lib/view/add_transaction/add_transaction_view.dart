@@ -5,6 +5,7 @@ import 'package:mintly/utils/widgets/black_button.dart';
 import 'package:mintly/utils/widgets/numeric_keypad.dart';
 import 'package:mintly/view/add_transaction/widgets/select_account_chips.dart';
 import 'package:mintly/view/add_transaction/widgets/select_categories_chips.dart';
+import 'package:mintly/view/add_transaction/widgets/transaction_description.dart';
 import 'package:mintly/view/add_transaction/widgets/transaction_textfield_card.dart';
 
 class AddTransactionView extends StatefulWidget {
@@ -18,13 +19,13 @@ class AddTransactionView extends StatefulWidget {
 }
 
 class _AddTransactionViewState extends State<AddTransactionView> {
-  late final TextEditingController controller;
+  late final TextEditingController amountController;
   late final FocusNode amountFocusNode;
 
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController();
+    amountController = TextEditingController();
     amountFocusNode = FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       amountFocusNode.requestFocus();
@@ -33,7 +34,7 @@ class _AddTransactionViewState extends State<AddTransactionView> {
 
   @override
   void dispose() {
-    controller.dispose();
+    amountController.dispose();
     amountFocusNode.dispose();
     super.dispose();
   }
@@ -41,17 +42,20 @@ class _AddTransactionViewState extends State<AddTransactionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Column(
         children: [
           Center(child: Text("Send Money", style: TextStyleConstants.w600F24)),
           const SizedBox(height: 20),
-          TransactionTextFieldCard(amountFocusNode: amountFocusNode, controller: controller),
+          TransactionTextFieldCard(amountFocusNode: amountFocusNode, controller: amountController),
+          SizedBox(height: 16),
+          TransactionDescription(),
           SizedBox(height: 16),
           SelectAccountChips(),
           SizedBox(height: 16),
           SelectCategoriesChips(),
-          Expanded(child: NumericKeypad(controller: controller)),
+          NumericKeypad(controller: amountController),
         ],
       ),
       bottomNavigationBar: Padding(

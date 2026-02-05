@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
+import 'package:mintly/utils/extensions/media_query_extensions.dart';
 
 class NumericKeypad extends StatefulWidget {
   final TextEditingController controller;
@@ -27,22 +28,25 @@ class _NumericKeypadState extends State<NumericKeypad> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: .max,
-      children: [
-        Expanded(child: Row(children: [_buildButton('1'), _buildButton('2'), _buildButton('3')])),
-        Expanded(child: Row(children: [_buildButton('4'), _buildButton('5'), _buildButton('6')])),
-        Expanded(child: Row(children: [_buildButton('7'), _buildButton('8'), _buildButton('9')])),
-        Expanded(
-          child: Row(
-            children: [
-              _buildButton('.'),
-              _buildButton('0'),
-              _buildButton('⌫', onPressed: _backspace),
-            ],
+    return SizedBox(
+      height: context.screenHeight/4,
+      child: Column(
+        mainAxisSize: .max,
+        children: [
+          Expanded(child: Row(children: [_buildButton('1'), _buildButton('2'), _buildButton('3')])),
+          Expanded(child: Row(children: [_buildButton('4'), _buildButton('5'), _buildButton('6')])),
+          Expanded(child: Row(children: [_buildButton('7'), _buildButton('8'), _buildButton('9')])),
+          Expanded(
+            child: Row(
+              children: [
+                _buildButton('.'),
+                _buildButton('0'),
+                _buildButton('⌫', onPressed: _backspace),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

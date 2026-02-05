@@ -43,7 +43,7 @@ final class SelectedAccountChipControllerProvider
 }
 
 String _$selectedAccountChipControllerHash() =>
-    r'bbae08e4d750ea1c456d9f05ae30d93eef3dad62';
+    r'94ec77c86fce2a2dae7b62e5660e13542ea4639b';
 
 abstract class _$SelectedAccountChipController extends $Notifier<AccountType?> {
   AccountType? build();
@@ -97,7 +97,7 @@ final class SelectedAccountOrCardNumberProvider
 }
 
 String _$selectedAccountOrCardNumberHash() =>
-    r'2b57a14aaff4147b3472f8866590d6b664c2fdf0';
+    r'9ea4ba863cc995094d9249194d933395a12f90f5';
 
 abstract class _$SelectedAccountOrCardNumber extends $Notifier<String?> {
   String? build();
@@ -207,7 +207,7 @@ final class SelectedTransactionSubCategoryProvider
 }
 
 String _$selectedTransactionSubCategoryHash() =>
-    r'c38f33a507710513c45f924542396090e332aa04';
+    r'3c17a50b1608452fa6db25272ad706e0ed750f35';
 
 abstract class _$SelectedTransactionSubCategory
     extends $Notifier<CategoriesModel?> {
@@ -221,6 +221,61 @@ abstract class _$SelectedTransactionSubCategory
             as $ClassProviderElement<
               AnyNotifier<CategoriesModel?, CategoriesModel?>,
               CategoriesModel?,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(TransactionDescriptionController)
+final transactionDescriptionControllerProvider =
+    TransactionDescriptionControllerProvider._();
+
+final class TransactionDescriptionControllerProvider
+    extends $NotifierProvider<TransactionDescriptionController, String> {
+  TransactionDescriptionControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'transactionDescriptionControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$transactionDescriptionControllerHash();
+
+  @$internal
+  @override
+  TransactionDescriptionController create() =>
+      TransactionDescriptionController();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$transactionDescriptionControllerHash() =>
+    r'14a47b69ed160a7bd170f3171e86516b35f38681';
+
+abstract class _$TransactionDescriptionController extends $Notifier<String> {
+  String build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
               Object?,
               Object?
             >;

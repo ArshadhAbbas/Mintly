@@ -64,9 +64,9 @@ class SelectAccountChips extends StatelessWidget {
                     if (showAddButton) const AddAccountChip(),
                   ],
                 ),
+                SizedBox(height: 10),
 
                 if (selectedAccountNumber != null && selectedAccountType != AccountType.cash) ...[
-                  SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(color: AppColors.appThemeYellow, borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.all(20),
@@ -94,6 +94,21 @@ class SelectAccountChips extends StatelessWidget {
                                             .replaceAll(" ", ""),
                                   )
                                   .getCardIcon,
+
+                        // trailing,
+                      ],
+                    ),
+                  ),
+                ] else if (selectedAccountType == AccountType.cash) ...[
+                  Container(
+                    decoration: BoxDecoration(color: AppColors.appThemeYellow, borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      mainAxisAlignment: .spaceBetween,
+                      crossAxisAlignment: .center,
+                      children: [
+                        Text("Available Balance:"),
+                        Text(cash.first.balanceAmount, style: TextStyleConstants.w600F14),
 
                         // trailing,
                       ],

@@ -28,10 +28,7 @@ class HomeScreenCardsList extends ConsumerWidget {
           child: CarouselSlider.builder(
             itemCount: cards.length + 1,
             itemBuilder: (context, index, realIndex) => index < cards.length
-                ? InkWell(
-                    // onTap: () => ref.read(cardsControllerProvider.notifier).deleteCard(cards[index].cardId),
-                    child: HomeScreenCard(cardModel: cards[index], index: index),
-                  )
+                ? HomeScreenCard(cardModel: cards[index], index: index)
                 : AddNewAccountCard(
                     onTap: () =>context.pushNamed(AddCardView.pathName)
                   ),
