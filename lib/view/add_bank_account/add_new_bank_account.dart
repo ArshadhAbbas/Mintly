@@ -115,6 +115,8 @@ class _AddNewBankAccountState extends ConsumerState<AddNewBankAccount> {
       ),
       bottomNavigationBar: BlackButton(
         onTap: () {
+
+          ifsController.text.trim().toUpperCase().replaceAll(" ", "");
           if ([bankNameController, accountNumberController, ifsController].any((element) => element.text.trim().isEmpty)) {
             context.showSnackBar("Please fill all the mandatory fields");
             return;
@@ -129,9 +131,9 @@ class _AddNewBankAccountState extends ConsumerState<AddNewBankAccount> {
                         : bankAccounts.isEmpty
                         ? 0
                         : bankAccounts.last.id + 1,
-                    bankName: bankNameController.text.trim(),
+                    bankName: bankNameController.text.toUpperCase().trim(),
                     accountNumber: accountNumberController.text.trim().replaceAll(" ", ""),
-                    ifscCode: ifsController.text.trim().replaceAll(" ", ""),
+                    ifscCode: ifsController.text.trim().toUpperCase().replaceAll(" ", ""),
                     accountBalance: balanceController.text.isEmpty ? 0 : num.parse(balanceController.text.trim()),
                   ),
                 );

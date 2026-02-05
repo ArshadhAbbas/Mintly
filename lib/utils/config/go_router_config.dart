@@ -54,7 +54,10 @@ class GoRouterConfig {
       GoRouterRoute(
         pathRoute: AddTransactionView.path,
         pathRouteName: AddTransactionView.pathName,
-        builder: (context, state) => AddTransactionView(),
+        builder: (context, state) {
+          final TransacationType transacationType = state.extra as TransacationType;
+          return AddTransactionView(transactionType: transacationType);
+        },
       ),
     ],
     errorBuilder: (context, state) => Scaffold(body: Center(child: Text(state.error.toString()))),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
 
@@ -20,7 +21,10 @@ class SpendActionButton extends StatelessWidget {
             crossAxisAlignment: .center,
             children: [
               GestureDetector(
-                onTap: onTap,
+                onTap: () async{
+                  await HapticFeedback.heavyImpact();
+                  onTap();
+                },
                 child: Container(
                   height: context.isMobile ? null : constraints.maxHeight - 25,
                   padding: EdgeInsets.symmetric(

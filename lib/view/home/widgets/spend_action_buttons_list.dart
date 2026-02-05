@@ -35,7 +35,7 @@ class SpendActionButtonsList extends ConsumerWidget {
               onTap: () {
                 bankAccounts.isEmpty && cash.isEmpty && cards.isEmpty
                     ? context.showCreateAccountDialogue
-                    : context.pushNamed(AddTransactionView.pathName);
+                    : context.pushNamed(AddTransactionView.pathName, extra: TransacationType.send);
               },
             ),
 
@@ -45,7 +45,7 @@ class SpendActionButtonsList extends ConsumerWidget {
               onTap: () {
                 bankAccounts.isEmpty && cash.isEmpty && cards.isEmpty
                     ? context.showCreateAccountDialogue
-                    : context.pushNamed(AddTransactionView.pathName);
+                    : context.pushNamed(AddTransactionView.pathName, extra: TransacationType.recieve);
               },
               buttonText: "Receive",
             ),

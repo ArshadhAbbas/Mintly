@@ -101,7 +101,7 @@ class SelectAccountChips extends StatelessWidget {
                   ),
                 ] else if (selectedAccountType == AccountType.cash) ...[
                   Container(
-                    decoration: BoxDecoration(color: AppColors.appThemeYellow, borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(border: Border.all(color: AppColors.appThemeYellow), borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.all(20),
                     child: Row(
                       mainAxisAlignment: .spaceBetween,

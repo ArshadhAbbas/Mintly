@@ -69,7 +69,7 @@ class _AuthenticatorViewState extends State<AuthenticatorView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 60),
-                Text("Please authenticate to continue", style: TextStyleConstants.w500F14),
+                Text("App is Secured", style: TextStyleConstants.w500F14),
                 const SizedBox(height: 10),
                 BlackButton(width: 120, height: 40, borderRadius: 30, onTap: _checkBiometricStatus, text: "Authenticate", textSize: 12),
                 SizedBox(height: 50),
