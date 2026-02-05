@@ -85,6 +85,62 @@ class AppTheme {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
       ),
+      timePickerTheme: TimePickerThemeData(
+        dayPeriodColor: AppColors.appThemeYellow,
+        dayPeriodBorderSide: const BorderSide(color: Colors.black),
+        dayPeriodShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: Colors.white,
+        dialHandColor: Colors.black,
+        dialBackgroundColor: AppColors.appThemeYellow,
+        hourMinuteColor: AppColors.appThemeYellow,
+        hourMinuteTextColor: Colors.black,
+        hourMinuteShape: CircleBorder(),
+      ),
+
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: Colors.white,
+        headerBackgroundColor: AppColors.appThemeYellow,
+        headerForegroundColor: Colors.black,
+        todayForegroundColor: WidgetStateProperty.all(AppColors.black),
+        dayOverlayColor: WidgetStatePropertyAll(AppColors.appThemeYellow),
+        yearForegroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return Colors.grey;
+          }
+          return Colors.black;
+        }),
+        todayBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.appThemeYellow;
+          }
+          return null;
+        }),
+        dayShape: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return ContinuousRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(5),
+              side: BorderSide(color: Colors.black),
+            );
+          }
+          return null;
+        }),
+
+        dayForegroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return Colors.black;
+          } else if (states.contains(WidgetState.disabled)) {
+            return Colors.grey;
+          }
+          return Colors.black;
+        }),
+
+        dayBackgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.appThemeYellow;
+          }
+          return null;
+        }),
+      ),
     );
   }
 }

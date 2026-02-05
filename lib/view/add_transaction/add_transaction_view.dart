@@ -6,6 +6,7 @@ import 'package:mintly/utils/widgets/black_button.dart';
 import 'package:mintly/utils/widgets/numeric_keypad.dart';
 import 'package:mintly/view/add_transaction/widgets/select_account_chips.dart';
 import 'package:mintly/view/add_transaction/widgets/select_categories_chips.dart';
+import 'package:mintly/view/add_transaction/widgets/transaction_datetime.dart';
 import 'package:mintly/view/add_transaction/widgets/transaction_description.dart';
 import 'package:mintly/view/add_transaction/widgets/transaction_textfield_card.dart';
 
@@ -48,32 +49,34 @@ class _AddTransactionViewState extends State<AddTransactionView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: ValueListenableBuilder(
+          valueListenable: _transacationType,
+          builder: (context, transacationTypeValue, child) {
+            return Center(
+              child: GestureDetector(
+                onTap: () => _transacationType.value = transacationTypeValue == TransacationType.send
+                    ? TransacationType.recieve
+                    : TransacationType.send,
+                child: Row(
+                  mainAxisAlignment: .center,
+                  crossAxisAlignment: .center,
+                  mainAxisSize: .min,
+                  spacing: 2,
+                  children: [
+                    Text("${_transacationType.value.name.toTitleCase} Money", style: TextStyleConstants.w600F16),
+                    Icon(Icons.keyboard_arrow_down_rounded),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
       body: Column(
         children: [
-          ValueListenableBuilder(
-            valueListenable: _transacationType,
-            builder: (context, transacationTypeValue, child) {
-              return Center(
-                child: GestureDetector(
-                  onTap: () => _transacationType.value = transacationTypeValue == TransacationType.send
-                      ? TransacationType.recieve
-                      : TransacationType.send,
-                  child: Row(
-                    mainAxisAlignment: .center,
-                    crossAxisAlignment: .center,
-                    mainAxisSize: .min,
-                    spacing: 2,
-                    children: [
-                      Text("${_transacationType.value.name.toTitleCase} Money", style: TextStyleConstants.w600F24),
-                      Icon(Icons.keyboard_arrow_down_rounded),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-          const SizedBox(height: 20),
+          TransactionDateTime(),
+          SizedBox(height: 10),
           TransactionTextFieldCard(amountFocusNode: amountFocusNode, controller: amountController),
           SizedBox(height: 16),
           TransactionDescription(),

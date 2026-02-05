@@ -28,13 +28,12 @@ class SelectedAccountChipController extends _$SelectedAccountChipController {
 @riverpod
 class SelectedAccountOrCardNumber extends _$SelectedAccountOrCardNumber {
   @override
-  String? build(){
+  String? build() {
     final banks = ref.watch(bankAccountsControllerProvider);
     final cards = ref.watch(cardsControllerProvider);
     if (banks.isNotEmpty) return banks.first.accountNumber;
     if (cards.isNotEmpty) return cards.first.cardNumber;
     return null;
-  
   }
 
   void updateAccountOrCardNumber(String accountNumber) {
@@ -66,8 +65,6 @@ class SelectedTransactionSubCategory extends _$SelectedTransactionSubCategory {
   }
 }
 
-
-
 @riverpod
 class TransactionDescriptionController extends _$TransactionDescriptionController {
   @override
@@ -75,5 +72,17 @@ class TransactionDescriptionController extends _$TransactionDescriptionControlle
 
   void updateDescription(String description) {
     state = description;
+  }
+}
+
+@riverpod
+class TransactionDateTimeController extends _$TransactionDateTimeController {
+  @override
+  DateTime build() => DateTime.now();
+
+  void updateDateAndTime(DateTime newDateAndTime) {
+    if (newDateAndTime.isBefore(DateTime.now())) {
+      state = newDateAndTime;
+    }
   }
 }

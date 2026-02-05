@@ -282,3 +282,57 @@ abstract class _$TransactionDescriptionController extends $Notifier<String> {
     element.handleCreate(ref, build);
   }
 }
+
+@ProviderFor(TransactionDateTimeController)
+final transactionDateTimeControllerProvider =
+    TransactionDateTimeControllerProvider._();
+
+final class TransactionDateTimeControllerProvider
+    extends $NotifierProvider<TransactionDateTimeController, DateTime> {
+  TransactionDateTimeControllerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'transactionDateTimeControllerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$transactionDateTimeControllerHash();
+
+  @$internal
+  @override
+  TransactionDateTimeController create() => TransactionDateTimeController();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateTime value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateTime>(value),
+    );
+  }
+}
+
+String _$transactionDateTimeControllerHash() =>
+    r'5f1883f603ca930205ebcc9e9e24a0dcf1b6098a';
+
+abstract class _$TransactionDateTimeController extends $Notifier<DateTime> {
+  DateTime build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateTime, DateTime>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateTime, DateTime>,
+              DateTime,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
