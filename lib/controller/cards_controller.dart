@@ -20,8 +20,8 @@ class CardsController extends _$CardsController {
     state = _box.values.toList();
   }
 
-  void deleteCard(int cardId) {
-    _box.delete(cardId);
+  void deleteCard(int cardId)async {
+    await _box.delete(cardId);
     state = _box.values.toList();
   }
 }

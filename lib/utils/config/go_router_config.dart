@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mintly/main.dart';
 import 'package:mintly/view/accounts/accounts_view.dart';
 import 'package:mintly/view/add_bank_account/add_new_bank_account.dart';
+import 'package:mintly/view/add_transaction/add_transaction_view.dart';
 import 'package:mintly/view/authenticator/authenticator_view.dart';
 import 'package:mintly/view/bottom_nav/view/bottom_nav_view.dart';
 import 'package:mintly/view/card_scanner/add_card_view.dart';
@@ -50,6 +51,11 @@ class GoRouterConfig {
         },
       ),
       GoRouterRoute(pathRoute: AccountsView.path, pathRouteName: AccountsView.pathName, builder: (context, state) => AccountsView()),
+      GoRouterRoute(
+        pathRoute: AddTransactionView.path,
+        pathRouteName: AddTransactionView.pathName,
+        builder: (context, state) => AddTransactionView(),
+      ),
     ],
     errorBuilder: (context, state) => Scaffold(body: Center(child: Text(state.error.toString()))),
   );

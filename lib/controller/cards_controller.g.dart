@@ -41,7 +41,7 @@ final class CardsControllerProvider
   }
 }
 
-String _$cardsControllerHash() => r'4b499956f1eb3a198d45330d3a837fd8deddb63a';
+String _$cardsControllerHash() => r'b3fd6074072b3177232c9f50732b1639d856b9ac';
 
 abstract class _$CardsController extends $Notifier<List<CardModel>> {
   List<CardModel> build();

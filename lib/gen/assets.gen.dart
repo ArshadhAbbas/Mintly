@@ -119,12 +119,15 @@ class $AssetsCardsGen {
 class $AssetsGeneralGen {
   const $AssetsGeneralGen();
 
+  /// File path: assets/general/mintly.svg
+  SvgGenImage get mintly => const SvgGenImage('assets/general/mintly.svg');
+
   /// File path: assets/general/mintly_logo.svg
   SvgGenImage get mintlyLogo =>
       const SvgGenImage('assets/general/mintly_logo.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [mintlyLogo];
+  List<SvgGenImage> get values => [mintly, mintlyLogo];
 }
 
 class $AssetsOnBoardingGen {

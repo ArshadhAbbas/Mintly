@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mintly/controller/accounts_controller.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
+import 'package:mintly/view/accounts/accounts_view.dart';
 import 'package:mintly/view/home/widgets/account_selection_chip.dart';
 import 'package:mintly/view/home/widgets/home_screen_banks_list.dart';
 import 'package:mintly/view/home/widgets/home_screen_cards_list.dart';
@@ -29,7 +31,16 @@ class HomeView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("Accounts", style: TextStyleConstants.w600F16),
+                    child: GestureDetector(
+                      onTap: () => context.pushNamed(AccountsView.pathName),
+                      child: Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          Text("Accounts", style: TextStyleConstants.w600F16),
+                          Icon(Icons.keyboard_arrow_right_rounded, size: 18),
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(height: 10),
                   AccountSelectChip(),

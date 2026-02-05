@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mintly/controller/bank_accounts_controller.dart';
+import 'package:mintly/controller/cards_controller.dart';
+import 'package:mintly/controller/cash_controller.dart';
+import 'package:mintly/utils/extensions/buildcontext_extensions.dart';
 import 'package:mintly/utils/extensions/media_query_extensions.dart';
+import 'package:mintly/view/add_transaction/add_transaction_view.dart';
 import 'package:mintly/view/home/widgets/spend_action_button.dart';
 
-class SpendActionButtonsList extends StatelessWidget {
+class SpendActionButtonsList extends ConsumerWidget {
   const SpendActionButtonsList({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bankAccounts = ref.watch(bankAccountsControllerProvider);
+    final cards = ref.watch(cardsControllerProvider);
+    final cash = ref.watch(cashControllerProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: SizedBox(
@@ -23,7 +33,9 @@ class SpendActionButtonsList extends StatelessWidget {
               icon: Icon(Icons.arrow_upward_rounded, color: Colors.white, size: context.isMobile ? null : context.screenWidth / 50),
               buttonText: "Send",
               onTap: () {
-                print("Send");
+                bankAccounts.isEmpty && cash.isEmpty && cards.isEmpty
+                    ? context.showCreateAccountDialogue
+                    : context.pushNamed(AddTransactionView.pathName);
               },
             ),
 
@@ -31,7 +43,9 @@ class SpendActionButtonsList extends StatelessWidget {
               isFilled: false,
               icon: Icon(Icons.arrow_downward_rounded, size: context.isMobile ? null : context.screenWidth / 50),
               onTap: () {
-                print("Receive");
+                bankAccounts.isEmpty && cash.isEmpty && cards.isEmpty
+                    ? context.showCreateAccountDialogue
+                    : context.pushNamed(AddTransactionView.pathName);
               },
               buttonText: "Receive",
             ),

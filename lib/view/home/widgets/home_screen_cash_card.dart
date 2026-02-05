@@ -1,10 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:mintly/model/cash_model.dart';
+import 'package:mintly/controller/cash_controller.dart';
 import 'package:mintly/utils/app_constants.dart/app_colors.dart';
-import 'package:mintly/utils/app_constants.dart/hive_boxes.dart';
 import 'package:mintly/utils/app_constants.dart/string_constants.dart';
 import 'package:mintly/utils/app_constants.dart/text_style_constants.dart';
 import 'package:mintly/utils/extensions/datetime_extensions.dart';
@@ -35,10 +34,10 @@ class HomeScreenCashCard extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: 18),
-                child: ValueListenableBuilder(
-                  valueListenable: Hive.box<CashModel>(HiveBoxes.cashBox).listenable(),
-                  builder: (context, cashBox, child) {
-                    return cashBox.isEmpty
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    final cash = ref.watch(cashControllerProvider);
+                    return cash.isEmpty
                         ? InkWell(
                             onTap: () => showModalBottomSheet(
                               backgroundColor: Colors.transparent,
@@ -92,7 +91,7 @@ class HomeScreenCashCard extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "Last Updated: ${cashBox.values.first.updatedTime.longAgo.toTitleCase}",
+                                              "Last Updated: ${cash.first.updatedTime.longAgo.toTitleCase}",
                                               style: TextStyleConstants.w600F14,
                                             ),
                                           ],
@@ -113,7 +112,7 @@ class HomeScreenCashCard extends StatelessWidget {
                               Spacer(),
 
                               Text("Cash in Hand", style: TextStyleConstants.w400F12.copyWith(color: Colors.black)),
-                              Text("${StringConstants.rupeeIcon} ${cashBox.values.first.balanceAmount}", style: TextStyleConstants.w600F16),
+                              Text("${StringConstants.rupeeIcon} ${cash.first.balanceAmount}", style: TextStyleConstants.w600F16),
 
                               SizedBox(height: constraints.maxHeight / 15),
                             ],
